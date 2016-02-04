@@ -9,9 +9,9 @@ import android.util.Log;
 /**
  * Created by Diego on 2/3/2016.
  */
-public class UserDAO implements DAO {
+public class UserContract implements DAO {
 
-    private static final String TAG = UserDAO.class.getSimpleName();
+    private static final String TAG = UserContract.class.getSimpleName();
     public static final String TABLE_NAME = "user";
     private static final String TABLE_USERNAME = "username";
     private static final String TABLE_EMAIL = "email";

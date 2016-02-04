@@ -1,9 +1,11 @@
 package com.demsmobile.vanpedia.database;
 
+import android.provider.BaseColumns;
+
 /**
  * Created by Diego on 2/3/2016.
  */
-public interface DAO {
+public interface DAO extends BaseColumns {
 
     public static final String TABLE_PK = "id";
     public static final String TABLE_UUID = "uuid"; // not sure if needed

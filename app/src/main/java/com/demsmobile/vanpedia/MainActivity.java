@@ -1,9 +1,10 @@
 package com.demsmobile.vanpedia;
 
+import android.app.ProgressDialog;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,13 +12,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.demsmobile.vanpedia.R;
+import com.demsmobile.vanpedia.data.Channel;
+import com.demsmobile.vanpedia.data.Item;
+import com.demsmobile.vanpedia.service.WeatherServiceCallback;
+import com.demsmobile.vanpedia.service.YahooWeatherService;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherServiceCallback {
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -25,10 +31,30 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
 
+
+    private ImageView weatherIconImageView;
+    private TextView temperatureTextView;
+    private TextView conditionsTextView;
+    private TextView locationTextView;
+
+    private YahooWeatherService service;
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
+        temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);
+        conditionsTextView = (TextView)findViewById(R.id.conditionTextView);
+        locationTextView = (TextView)findViewById(R.id.locationTextView);
+
+        service = new YahooWeatherService(this);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading...");
+        dialog.show();
+        service.refreshWeather("Vancouver, BC");
 
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
@@ -113,5 +139,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void serviceSuccess(Channel channel) {
+        dialog.hide();
+        Item item = channel.getItem();
+        int resourceId = getResources().getIdentifier("drawable/weather_icon_" + item.getCondition().getCode(), null, getPackageName());
+
+        @SuppressWarnings("deprecation")
+        Drawable weatherIconDrawable = getResources().getDrawable(resourceId);
+        weatherIconImageView.setImageDrawable(weatherIconDrawable);
+
+        locationTextView.setText(service.getLocation());
+        temperatureTextView.setText(item.getCondition().getTemperature() + "\u00B0" + channel.getUnits().getTemperature());
+        conditionsTextView.setText(item.getCondition().getDescription());
+
+    }
+
+    @Override
+    public void serviceFailure(Exception exception) {
+        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        dialog.hide();;
     }
 }

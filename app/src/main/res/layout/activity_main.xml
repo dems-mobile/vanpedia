@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:background="@drawable/vancouver_night">
+        android:background="@drawable/vancouver">
 
         <TextView
             android:layout_width="wrap_content"
@@ -149,17 +149,65 @@
         </GridLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            android:id="@+id/temperatureTextView"
+            android:layout_marginTop="69dp"
+            android:textSize="70dp"
+            android:textColor="#ffffff"
+            style="TextShadow"
+            android:layout_below="@+id/main_categories_layout"
+            android:layout_toRightOf="@+id/yahooImageView"
+            android:textAlignment="center"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="15"
-            android:id="@+id/textViewTemperature"
-            android:layout_marginTop="51dp"
-            android:textSize="100dp"
-            android:typeface="sans"
-            android:layout_below="@+id/main_categories_layout"
+            android:text="Condition"
+            android:id="@+id/conditionTextView"
+            android:layout_below="@+id/temperatureTextView"
             android:layout_centerHorizontal="true"
-            style="@style/TextShadow"/>
+            android:textColor="#ffffff"
+            style="TextShadow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Location"
+            android:id="@+id/locationTextView"
+            android:layout_below="@+id/conditionTextView"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            style="TextShadow"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yahooImageView"
+            android:layout_below="@+id/locationTextView"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@drawable/yahoo_logo"
+            android:layout_below="@+id/yahooImageView"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weatherIconImageView"
+            android:src="@drawable/na"
+            android:layout_above="@+id/conditionTextView"
+            android:layout_toLeftOf="@+id/imageViewNearBy"
+            android:layout_toStartOf="@+id/imageViewNearBy" />
 
 
     </RelativeLayout>

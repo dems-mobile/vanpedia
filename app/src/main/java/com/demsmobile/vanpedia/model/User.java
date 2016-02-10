@@ -34,4 +34,4 @@ public class User {
     }
 }
 
-keytool -exportcert -list -v -alias vanpedia -keystore ~/.android/debug.keystore
+//keytool -exportcert -list -v -alias vanpedia -keystore ~/.android/debug.keystore

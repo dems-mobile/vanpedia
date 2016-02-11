@@ -1,9 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vanpedia</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">VANPEDIA</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="stay">Stay</string>
 
+    
     <!-- Sign-in status messages -->
     <string name="sign_in">Google Sign-In</string>
     <string name="signed_in_fmt">Signed in as: %s</string>

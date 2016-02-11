@@ -15,4 +15,14 @@
         <item name="colorButtonNormal">@color/material_blue_grey_800</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    
+    <style name="TextShadow">
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">3</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+
 </resources>

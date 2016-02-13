@@ -5,6 +5,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ThemeOverlay.MyNoTitleActivity" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Dark Buttons -->
+    <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorButtonNormal">@color/material_blue_grey_800</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
     <style name="TextShadow">
         <item name="android:shadowColor">#000000</item>
         <item name="android:shadowDx">3</item>

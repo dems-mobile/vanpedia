@@ -1,27 +1,28 @@
 package com.demsmobile.vanpedia;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
 import com.demsmobile.vanpedia.service.WeatherServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
-
 
 public class MainActivity extends AppCompatActivity implements WeatherServiceCallback {
 
@@ -67,14 +68,18 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Settings", "Stored PLaces", "About" };
+        String[] osArray = { "Sign In", "Settings", "Stored PLaces", "About" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                        break;
+                }
             }
         });
     }

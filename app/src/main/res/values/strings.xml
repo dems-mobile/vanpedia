@@ -3,6 +3,7 @@
 
     <string name="app_name">VANPEDIA</string>
     <string name="action_settings">Settings</string>
+    
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="stay">Stay</string>
@@ -10,5 +11,17 @@
     <string name="title_activity_map_fragment">Map</string>
 
     <string name="hello_world">Hello world!</string>
+
+    
+    <!-- Sign-in status messages -->
+    <string name="sign_in">Google Sign-In</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="signed_in">Signed in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_out">Signed out</string>
+    <string name="loading">Loading…</string>
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
 
 </resources>

@@ -1,9 +1,12 @@
 package com.demsmobile.vanpedia;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
 import com.demsmobile.vanpedia.service.WeatherServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
+import com.google.android.gms.maps.MapFragment;
 
 
 public class MainActivity extends AppCompatActivity implements WeatherServiceCallback {
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Settings", "Stored PLaces", "About" };
+        String[] osArray = { "Settings", "Stored Places", "About" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -160,6 +164,22 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     @Override
     public void serviceFailure(Exception exception) {
         Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-        dialog.hide();;
+        dialog.hide();
+    }
+/*  --------------START - ADDED BY MICHELLE, IMPLEMENTING MAPS---------------------------*/
+    public void openGoogleMap(View view) {
+
+        setContentView(R.layout.activity_map_fragment);
+        addMapFragment();
+    }
+
+    private void addMapFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        map_fragment fragment = new map_fragment();
+        transaction.add(R.id.mapView, fragment);
+        transaction.commit();
     }
 }
+/*  --------------END -ADDED BY MICHELLE, IMPLEMENTING MAPS---------------------------*/
+

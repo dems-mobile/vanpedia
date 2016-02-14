@@ -6,5 +6,9 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="stay">Stay</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_map_fragment">Map</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

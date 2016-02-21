@@ -1,22 +1,15 @@
 package com.demsmobile.vanpedia;
 
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -53,16 +46,12 @@ public class map_fragment extends Fragment{
 
         /* ATTEMPT TO GET ACTUAL COORDINATES, BUT DOESN'T SEEM TO BE WORKING ON MY EMULATOR-MICHELLE */
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location != null) {
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-        }
-        else{
+        //LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+       // Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
             longitude = 78.486671;
             latitude = 17.385044;
-        }
+
 
          /* end of attempt - michelle */
 

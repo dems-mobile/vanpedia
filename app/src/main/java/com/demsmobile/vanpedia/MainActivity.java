@@ -1,24 +1,23 @@
 package com.demsmobile.vanpedia;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
 import com.demsmobile.vanpedia.service.WeatherServiceCallback;
@@ -78,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                 switch (position) {
                     case 0:
                         startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         break;
                 }
             }
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     @Override
     public void serviceFailure(Exception exception) {
         Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-        dialog.hide();;
+        dialog.hide();
     }
+
 }

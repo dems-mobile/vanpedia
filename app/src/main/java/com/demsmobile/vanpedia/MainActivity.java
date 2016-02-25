@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
 import com.demsmobile.vanpedia.service.WeatherServiceCallback;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
 
-
     private ImageView weatherIconImageView;
     private TextView temperatureTextView;
     private TextView conditionsTextView;
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
     private YahooWeatherService service;
     private ProgressDialog dialog;
+
+    public String googlePlacesKeyword = "restaurant";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,4 +172,21 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         dialog.hide();
     }
 
+     /**
+     *          ADDED BY MICHELLE FEB 24TH
+     */
+    public void showRestaurants(View view) {
+
+        startActivity(new Intent(MainActivity.this, PlacesActivity.class));
+
+        /**Should we call Places Activity first in order to instantiate a private key connection?
+         * how to pass argument without a constructor?
+         */
+       // Intent intent = new Intent(MainActivity.this, SearchPlacesList.class);
+       // Bundle b = new Bundle();
+       // b.putString("key", googlePlacesKeyword); //Your id
+       // intent.putExtras(b); //Put your id to your next Intent
+       // startActivity(intent);
+       // finish();
+    }
 }

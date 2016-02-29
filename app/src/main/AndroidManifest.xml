@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".SignInActivity"
-            android:label="@string/sign_in"></activity>
+            android:label="@string/sign_in" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,6 +43,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.demsmobile.vanpedia.MainActivity" />
         </activity>
+        <activity android:name=".SubcategoryActivity"></activity>
     </application>
 
 </manifest>

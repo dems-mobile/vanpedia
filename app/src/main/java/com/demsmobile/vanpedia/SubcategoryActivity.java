@@ -29,10 +29,12 @@ public class SubcategoryActivity extends MainActivity {
 
         gridView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String subCategoryName = ((TextView) v.findViewById(R.id.grid_item_label)).getText().toString();
+                g.setSubCategoryName(subCategoryName);
+                g.setSearchKeys(g.getCategoryName() + " " + subCategoryName);
                 Toast.makeText(
-                        getApplicationContext(),
-                        ((TextView) v.findViewById(R.id.grid_item_label))
-                                .getText(), Toast.LENGTH_SHORT).show();
+                        getApplicationContext(),subCategoryName
+                        , Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -50,11 +52,11 @@ public class SubcategoryActivity extends MainActivity {
         String[] subCategories = {};
 
         if (categoryName.equals("eat")) {
-            subCategories = new String[] {"Android", "iOS","Windows", "Blackberry" };
+            subCategories = new String[] {"Fine", "Casual","Pub", "Breakfast", "Bistro", "Coffee" };
         } else if (categoryName.equals("explore")) {
-            subCategories = new String[] {"explore1", "explore2","explore3", "explore4" };
+            subCategories = new String[] {"Concert","Night Life", "Beach", "Sport", "Bike", "Hike", "Mountain" };
         } else if (categoryName.equals("stay")) {
-            subCategories = new String[] {"stay", "iOS","explore2", "Blackberry" };
+            subCategories = new String[] {"Hotel", "B&B","Hostel", "Rent" };
         }
         return subCategories;
     }

@@ -6,6 +6,7 @@ public class Globals{
     // Global variable
     private String categoryName;
     private String subCategoryName;
+    private String searchKeys;
 
     // Restrict the constructor from being instantiated
     private Globals(){}
@@ -17,12 +18,18 @@ public class Globals{
         return this.categoryName;
     }
 
-    public void setSubCategoryName(String id){
-        this.subCategoryName=id;
+    public void setSubCategoryName(String subName){
+        this.subCategoryName=subName;
     }
-
     public String getSubCategoryName(){
         return this.subCategoryName;
+    }
+
+    public void setSearchKeys(String keys){
+        this.searchKeys=keys;
+    }
+    public String getSearchKeys(){
+        return this.searchKeys;
     }
 
     public static synchronized Globals getInstance(){

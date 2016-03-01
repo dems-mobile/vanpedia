@@ -66,8 +66,8 @@
                 android:backgroundTint="#71d300"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:src="@drawable/glyphicons_497_stay"
+                android:id="@+id/imageButtonStay"
+                android:src="@drawable/bed"
                 android:background="@drawable/round_button"
                 android:scaleType="centerInside"
                 android:layout_row="0"
@@ -75,28 +75,30 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:onClick="openSubcategory"/>
 
             <ImageButton
                 android:backgroundTint="#0eaee1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton4"
-                android:src="@drawable/glyphicons_503_explore"
+                android:id="@+id/imageButtonExplore"
+                android:src="@drawable/binoculars"
                 android:background="@drawable/round_button"
                 android:scaleType="centerInside"
                 android:layout_gravity="top"
                 android:layout_row="0"
                 android:layout_column="2"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:onClick="openSubcategory"/>
 
             <ImageButton
                 android:backgroundTint="#db3424"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton3"
-                android:src="@drawable/glyphicons_476_eat"
+                android:id="@+id/imageButtonEat"
+                android:src="@drawable/restaurant2"
                 android:background="@drawable/round_button"
                 android:scaleType="centerInside"
                 android:baselineAlignBottom="false"
@@ -104,7 +106,8 @@
                 android:layout_row="0"
                 android:layout_column="1"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:onClick="openSubcategory"/>
 
             <TextView
                 android:layout_width="wrap_content"

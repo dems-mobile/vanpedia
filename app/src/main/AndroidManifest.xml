@@ -45,6 +45,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.demsmobile.vanpedia.MainActivity" />
         </activity>
+
         <activity
             android:name=".PlacesActivity"
             android:label="@string/title_activity_places" >
@@ -57,6 +58,7 @@
             android:name=".PlaceDetails"
             android:label="@string/title_activity_place_details" >
         </activity>
+        <activity android:name=".SubcategoryActivity"></activity>
     </application>
 
 </manifest>

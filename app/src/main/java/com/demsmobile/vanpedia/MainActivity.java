@@ -21,10 +21,13 @@ import android.widget.Toast;
 
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
+import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.service.WeatherServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
 
 public class MainActivity extends AppCompatActivity implements WeatherServiceCallback {
+
+    public int categoryId;
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -173,9 +176,14 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
 
+    public void openSubcategory(View v){
+        String categoryName = getResources().getResourceEntryName(v.getId());
+        Globals g = Globals.getInstance();
+        g.setCategoryName(categoryName.replace("imageButton","").toLowerCase());
+        startActivity(new Intent(MainActivity.this, SubcategoryActivity.class));
+
     public void showRestaurants(View view) {
 
         startActivity(new Intent(MainActivity.this, PlacesActivity.class));
-
     }
 }

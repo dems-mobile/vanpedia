@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         service = new YahooWeatherService(this);
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading...");
-        dialog.show();
+//        dialog.show();
         service.refreshWeather("Vancouver, BC");
 
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -172,21 +172,10 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         dialog.hide();
     }
 
-     /**
-     *          ADDED BY MICHELLE FEB 24TH
-     */
+
     public void showRestaurants(View view) {
 
         startActivity(new Intent(MainActivity.this, PlacesActivity.class));
 
-        /**Should we call Places Activity first in order to instantiate a private key connection?
-         * how to pass argument without a constructor?
-         */
-       // Intent intent = new Intent(MainActivity.this, SearchPlacesList.class);
-       // Bundle b = new Bundle();
-       // b.putString("key", googlePlacesKeyword); //Your id
-       // intent.putExtras(b); //Put your id to your next Intent
-       // startActivity(intent);
-       // finish();
     }
 }

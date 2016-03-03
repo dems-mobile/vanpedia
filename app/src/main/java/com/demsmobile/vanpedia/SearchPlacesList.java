@@ -1,8 +1,11 @@
 package com.demsmobile.vanpedia;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.places.JSONfunctions;
 import com.demsmobile.vanpedia.places.SearchSingle;
 
@@ -20,46 +24,35 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Displays a list of relating places corresponding to the subcategory keyword when used hits a sub-category button
- * A onItemList() is created to listen for a click on the list...
- * The tap on the list willl trigger PlaceDetails() to start
- */
-
-
 public class SearchPlacesList extends ListActivity{
 
-    /**
-     * possible solution --> replace the key= in the string URL to the server key credential -->AIzaSyACTV150tm2BH49XsFD91CX5dbbrMjnXns
-     * The keyWord is hardcoded for now.... but will eventually be passed as an argument depending on the subcategory selection
-     * */
 
     protected  String s=null;
     String reference[]=new String[20];
     String keyWord = "restaurant";
-
-    /**
-     * This would accept argument, but it doesn't work, I think it is out dated
-     */
-   // Bundle b = getIntent().getExtras();
-   // String keyWord = b.getString("key");
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_search_list);          //need to create this
+        setContentView(R.layout.activity_search_list);
 
         ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 
-        //takes a key word
         // if we want within 500meters --> change location to location=-33.8670522,151.1957362&radius=500
-        String url="https://maps.googleapis.com/maps/api/place/search/json?location=41.8584,-87.6307&radius=5000&types="+keyWord+"&sensor=false&key=AIzaSyC9fny8B5GVZVLjPTQe24WAzq1znEkPSuk";
+        String url="https://maps.googleapis.com/maps/api/place/search/json?location=41.8584,-87.6307&radius=5000&types="+keyWord+"&sensor=false&key=AIzaSyAY5H67_Nuvb40ISHt21LGHGN60SJcXN4c";
         JSONObject json = JSONfunctions.getJSONfromURL(url);
 
         try{

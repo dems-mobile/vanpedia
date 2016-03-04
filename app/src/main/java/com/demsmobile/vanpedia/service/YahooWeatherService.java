@@ -16,11 +16,11 @@ import java.net.URLConnection;
  * Created by Redlive on 2016-02-07.
  */
 public class YahooWeatherService {
-    private WeatherServiceCallback callback;
+    private ServiceCallback callback;
     private String location;
     private Exception error;
 
-    public YahooWeatherService(WeatherServiceCallback callback) {
+    public YahooWeatherService(ServiceCallback callback) {
         this.callback = callback;
     }
 

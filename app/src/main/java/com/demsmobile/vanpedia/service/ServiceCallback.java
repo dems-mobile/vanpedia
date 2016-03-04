@@ -5,7 +5,7 @@ import com.demsmobile.vanpedia.data.Channel;
 /**
  * Created by Redlive on 2016-02-07.
  */
-public interface WeatherServiceCallback {
-    void serviceSuccess(Channel channel);
+public interface ServiceCallback<T> {
+    void serviceSuccess(T response);
     void serviceFailure(Exception exception);
 }

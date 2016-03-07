@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
 
     GridView gridView;
     Globals g = Globals.getInstance();
+    ImageView bgImg;
 
     // Alert Dialog Manager
     AlertManager alert = new AlertManager();
@@ -33,7 +35,9 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
 
 
         setHeaderName();
-        
+
+        bgImg = (ImageView)findViewById(R.id.imageBg);
+        setBackground();
         gridView = (GridView) findViewById(R.id.gridview);
 
         gridView.setAdapter(new ImageAdapter(this, getSubcategoriesNames()));
@@ -55,6 +59,17 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
         String categoryName = g.getCategoryName();
         TextView text_view = (TextView)findViewById(R.id.subCategoryNmeTextView);
         text_view.setText(categoryName.toString());
+    }
+
+    public void setBackground(){
+        String categoryName = g.getCategoryName();
+        if (categoryName.equals("eat")) {
+           bgImg.setImageResource(R.drawable.salt);
+        } else if (categoryName.equals("explore")) {
+            bgImg.setImageResource(R.drawable.mountains);
+        } else if (categoryName.equals("stay")) {
+            bgImg.setImageResource(R.drawable.hotelimg);
+        }
     }
 
     public String [] getSubcategoriesNames(){

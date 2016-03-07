@@ -112,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                     case 2:
                         startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         break;
+                    case 3:
+                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        break;
                 }
             }
         });

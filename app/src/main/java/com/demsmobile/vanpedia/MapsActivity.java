@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.demsmobile.vanpedia.service.LocationService;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,11 +16,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
-    private static final long MIN_TIME = 400;
+    private  Location location;
+
     private static final float MIN_DISTANCE = 15;
 
     @Override
@@ -30,6 +31,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        location = LocationService.getInstance(this).getLocation();
+
 
 //        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
@@ -49,33 +53,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-//        LatLng marker = new LatLng(0, 0);
-//        mMap.addMarker(new MarkerOptions().position(marker).title("Marker"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        if (location != null) {
+            LatLng marker = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker, MIN_DISTANCE);
+            mMap.addMarker(new MarkerOptions().position(marker).title("Marker"));
+            mMap.moveCamera(cameraUpdate);
+        }
     }
 
-//    @Override
-//    public void onLocationChanged(Location location) {
-//
-//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, MIN_DISTANCE);
-//        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-//        mMap.animateCamera(cameraUpdate);
-//        locationManager.removeUpdates(this);
-//    }
-//
-//    @Override
-//    public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderEnabled(String provider) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderDisabled(String provider) {
-//
-//    }
+    @Override
+    public void onLocationChanged(Location location) {
+
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, MIN_DISTANCE);
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

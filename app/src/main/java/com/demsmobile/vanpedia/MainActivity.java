@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (addresses.size() > 0) {
+        if (addresses != null && addresses.size() > 0) {
             weatherService = new YahooWeatherService(this);
             weatherService.refreshWeather(addresses.get(0).getLocality()+", "+ addresses.get(0).getCountryName());
         }

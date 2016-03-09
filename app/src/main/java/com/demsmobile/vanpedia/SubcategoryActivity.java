@@ -1,6 +1,8 @@
 package com.demsmobile.vanpedia;
-import android.app.Activity;
+import android.app.*;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,9 +18,10 @@ import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.service.ServiceCallback;
 import com.demsmobile.vanpedia.util.AlertManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SubcategoryActivity extends Activity implements ServiceCallback<List<Place>> {
+public class SubcategoryActivity extends Activity implements ServiceCallback<ArrayList<Place>> {
 
     GridView gridView;
     Globals g = Globals.getInstance();
@@ -64,11 +67,11 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
     public void setBackground(){
         String categoryName = g.getCategoryName();
         if (categoryName.equals("eat")) {
-           bgImg.setImageResource(R.drawable.salt);
+           bgImg.setImageResource(R.drawable.saltbackground);
         } else if (categoryName.equals("explore")) {
-            bgImg.setImageResource(R.drawable.mountains);
+            bgImg.setImageResource(R.drawable.mountainsbackground);
         } else if (categoryName.equals("stay")) {
-            bgImg.setImageResource(R.drawable.hotelimg);
+            bgImg.setImageResource(R.drawable.hotelbackground);
         }
     }
 
@@ -88,8 +91,11 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
 
 
     @Override
-    public void serviceSuccess(List<Place> places) {
-        Toast.makeText(this, "Found " + places.size() + ".", Toast.LENGTH_LONG).show();
+    public void serviceSuccess(ArrayList<Place> places) {
+
+        Intent intent = new Intent(SubcategoryActivity.this, ListActivity.class);
+        intent.putExtra("PlacesArray", places);
+
     }
 
     @Override

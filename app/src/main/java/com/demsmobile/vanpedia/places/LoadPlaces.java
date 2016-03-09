@@ -14,6 +14,7 @@ import com.demsmobile.vanpedia.MainActivity;
 import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.service.ServiceCallback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
     private PlacesList nearPlaces;
     private ServiceCallback callback;
 
-    public LoadPlaces(Context c, ServiceCallback<List<Place>> callback){
+    public LoadPlaces(Context c, ServiceCallback<ArrayList<Place>> callback){
         this.context = c;
         this.callback = callback;
     }

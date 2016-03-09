@@ -14,6 +14,9 @@ public class AboutUsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+
+//        mDrawerToggle.setDrawerIndicatorEnabled(true);
+//        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
 

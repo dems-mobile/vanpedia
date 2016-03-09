@@ -3,8 +3,11 @@ package com.demsmobile.vanpedia;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +18,8 @@ public class SplashActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_splash);
         TimerTask task = new TimerTask() {
             @Override

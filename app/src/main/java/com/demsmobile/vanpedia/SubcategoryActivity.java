@@ -64,11 +64,11 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
     public void setBackground(){
         String categoryName = g.getCategoryName();
         if (categoryName.equals("eat")) {
-           bgImg.setImageResource(R.drawable.salt);
+           bgImg.setImageResource(R.drawable.saltblurimg);
         } else if (categoryName.equals("explore")) {
-            bgImg.setImageResource(R.drawable.mountains);
+            bgImg.setImageResource(R.drawable.mountainsblurimg);
         } else if (categoryName.equals("stay")) {
-            bgImg.setImageResource(R.drawable.hotelimg);
+            bgImg.setImageResource(R.drawable.hotelblurimg);
         }
     }
 

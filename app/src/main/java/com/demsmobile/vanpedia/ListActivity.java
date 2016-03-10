@@ -20,14 +20,18 @@ import java.util.List;
 
 public class ListActivity extends ActionBarActivity {
 
+    Intent i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        //??????????? Need help here...... (Trying to show the name, address, and phone number... for now)
-        ArrayList<Place> placesList = new ArrayList<Place>();
-        placesList = (ArrayList<Place>)getIntent().getSerializableExtra("PlacesArray");
+         i = getIntent();
+
+       // ArrayList<Place> placesList = new ArrayList<Place>();
+       // placesList = (ArrayList<Place>)getIntent().getSerializableExtra("PlacesArray");
+       // getListData(placesList);
 
         ArrayList place_details = getListData();
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
@@ -44,11 +48,12 @@ public class ListActivity extends ActionBarActivity {
     private ArrayList getListData() {
         ArrayList<Place> results = new ArrayList<Place>();
         Place placeData = new Place();
-        String name = placeData.name;
-        String address = placeData.formatted_address;
-        String number = placeData.formatted_phone_number;
+        String name = i.getStringExtra("name");
+        String address = i.getStringExtra("formatted_address");
+        String number = i.getStringExtra("formatted_phone_number");
         results.add(placeData);
         return results;
+
     }
 
 }

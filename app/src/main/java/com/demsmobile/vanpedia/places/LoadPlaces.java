@@ -83,7 +83,7 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
         pDialog.dismiss();
         // updating UI from Background Thread
 
-                String status = nearPlaces.status;
+                String status = nearPlaces.status;  //????????????????????????
 
                 // Check for all possible status
                 if (status.equals("OK")) {

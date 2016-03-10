@@ -91,11 +91,12 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Arr
 
 
     @Override
-    public void serviceSuccess(ArrayList<Place> places) {
+    public void serviceSuccess(ArrayList<Place> places) {  //places
 
         Intent intent = new Intent(SubcategoryActivity.this, ListActivity.class);
         intent.putExtra("PlacesArray", places);
 
+        System.out.print("here");
     }
 
     @Override

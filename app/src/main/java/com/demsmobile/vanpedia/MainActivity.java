@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Sign In", "Liked Places", "About Our App", "References"};
+        String[] osArray = { "Sign In", "Liked Places", "About This App", "References"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         break;
                     case 3:
-                       // startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        startActivity(new Intent(MainActivity.this, ReferenceActivity.class));
                         break;
                 }
             }

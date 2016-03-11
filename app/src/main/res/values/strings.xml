@@ -23,6 +23,7 @@
     <string name="title_activity_splash">VANPEDIA</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_about_us">About Our App</string>
+    <string name="title_activity_about_us">About This App</string>
+    <string name="title_activity_reference">References</string>
 
 </resources>

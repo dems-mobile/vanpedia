@@ -25,5 +25,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_about_us">About This App</string>
     <string name="title_activity_reference">References</string>
+    <string name="title_activity_list">Search Results</string>
 
 </resources>

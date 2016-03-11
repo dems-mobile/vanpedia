@@ -1,6 +1,8 @@
 package com.demsmobile.vanpedia;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,6 +18,7 @@ import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.service.ServiceCallback;
 import com.demsmobile.vanpedia.util.AlertManager;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class SubcategoryActivity extends Activity implements ServiceCallback<List<Place>> {
@@ -89,7 +92,16 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
 
     @Override
     public void serviceSuccess(List<Place> places) {
-        Toast.makeText(this, "Found " + places.size() + ".", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(SubcategoryActivity.this, ListActivity.class);
+        intent.putExtra("PlacesArray", (Serializable) places);   //(Parcelable) places
+
+
+        // String ref = places.get(0).reference.toString();                           //returns googleID to grab details
+           // String vicin = places.get(0).vicinity.toString();                          //returns Surrey for every icon
+           // String phone = places.get(0).formatted_phone_number.toString();            //crashes
+           // Toast.makeText(this, phone + " " , Toast.LENGTH_SHORT).show();             //  " " + vicin + " " + phone
+
     }
 
     @Override

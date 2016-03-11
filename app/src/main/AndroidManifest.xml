@@ -57,6 +57,10 @@
             android:name=".ReferenceActivity"
             android:label="@string/title_activity_reference" >
         </activity>
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/title_activity_list" >
+        </activity>
     </application>
 
 </manifest>

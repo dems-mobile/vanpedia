@@ -3,9 +3,9 @@ package com.demsmobile.vanpedia.places;
 /**
  * Created by Diego on 3/4/2016.
  */
-import java.io.Serializable;
-
 import com.google.api.client.util.Key;
+
+import java.io.Serializable;
 
 /** Implement this class from "Serializable"
  * So that you can pass this class Object to another using Intents

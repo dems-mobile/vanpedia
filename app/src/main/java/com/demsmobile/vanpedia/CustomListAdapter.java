@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.places.Place;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

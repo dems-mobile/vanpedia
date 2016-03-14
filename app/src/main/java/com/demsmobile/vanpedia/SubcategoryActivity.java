@@ -1,17 +1,15 @@
 package com.demsmobile.vanpedia;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.demsmobile.vanpedia.places.GooglePlaces;
 import com.demsmobile.vanpedia.places.LoadPlaces;
 import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.service.Globals;
@@ -50,8 +48,7 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
                 String subCategoryName = ((TextView) v.findViewById(R.id.grid_item_label)).getText().toString();
                 g.setSubCategoryName(subCategoryName);
                 g.setSearchKeys(g.getCategoryName() + " " + subCategoryName);
-                Toast.makeText(getApplicationContext(),subCategoryName, Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(getApplicationContext(),subCategoryName, Toast.LENGTH_SHORT).show();
                 new LoadPlaces(SubcategoryActivity.this, SubcategoryActivity.this).execute(g.getSearchKeys());
             }
         });
@@ -92,15 +89,14 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
 
     @Override
     public void serviceSuccess(List<Place> places) {
-
         Intent intent = new Intent(SubcategoryActivity.this, ListActivity.class);
         intent.putExtra("PlacesArray", (Serializable) places);   //(Parcelable) places
+        startActivity(intent);
 
-
-        // String ref = places.get(0).reference.toString();                           //returns googleID to grab details
-           // String vicin = places.get(0).vicinity.toString();                          //returns Surrey for every icon
-           // String phone = places.get(0).formatted_phone_number.toString();            //crashes
-           // Toast.makeText(this, phone + " " , Toast.LENGTH_SHORT).show();             //  " " + vicin + " " + phone
+        /* String ref = places.get(0).reference.toString();                           //returns googleID to grab details
+            String vicin = places.get(0).vicinity.toString();                          //returns Surrey for every icon
+            String phone = places.get(0).formatted_phone_number.toString();            //crashes
+            Toast.makeText(this, phone + " " , Toast.LENGTH_SHORT).show();     */        //  " " + vicin + " " + phone
 
     }
 

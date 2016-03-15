@@ -10,12 +10,12 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.text.Html;
 
-import com.demsmobile.vanpedia.MainActivity;
 import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.service.ServiceCallback;
 
-import java.util.HashMap;
 import java.util.List;
+
+import static com.google.android.gms.internal.zzip.runOnUiThread;
 
 /**
  * Background Async Task to Load Google places
@@ -73,15 +73,16 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
 
     /**
      * After completing background task Dismiss the progress dialog
-     * and show the data in UI
-     * Always use runOnUiThread(new Runnable()) to update UI from background
-     * thread, otherwise you will get error
-     * **/
+    * and show the data in UI
+    * Always use runOnUiThread(new Runnable()) to update UI from background
+    * thread, otherwise you will get error
+    * **/
     protected void onPostExecute(String file_url) {
         // dismiss the dialog after getting all products
         pDialog.dismiss();
         // updating UI from Background Thread
-
+        runOnUiThread(new Runnable() {
+            public void run() {
                 String status = nearPlaces.status;
 
                 // Check for all possible status
@@ -95,6 +96,6 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
                     callback.serviceFailure(new Exception(nearPlaces.status));
                 }
             }
-
+        });
     }
-
+}

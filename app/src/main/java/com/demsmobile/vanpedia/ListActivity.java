@@ -1,5 +1,6 @@
 package com.demsmobile.vanpedia;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListActivity extends ActionBarActivity {
+public class ListActivity extends Activity {
 
 
     List<Place> placesList;
@@ -20,7 +21,7 @@ public class ListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.custom_list);
 
         placesList = (List<Place>)getIntent().getSerializableExtra("PlacesArray");
 

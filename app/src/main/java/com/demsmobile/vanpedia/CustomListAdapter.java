@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.google.android.gms.location.places.Place;
+import com.demsmobile.vanpedia.places.Place;
 
 import java.util.List;
 
@@ -52,9 +52,9 @@ public class CustomListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.nameView.setText(listData.get(position).getName());
-        holder.addressView.setText("By, " + listData.get(position).getAddress());
-        holder.phoneView.setText(listData.get(position).getPhoneNumber());
+        holder.nameView.setText(listData.get(position).name);
+        holder.addressView.setText("By, " + listData.get(position).formatted_address);
+        holder.phoneView.setText(listData.get(position).formatted_phone_number);
         return convertView;
     }
 

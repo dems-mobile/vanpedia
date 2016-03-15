@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
 
-
     private ImageView weatherIconImageView;
     private TextView temperatureTextView;
     private TextView conditionsTextView;

@@ -47,8 +47,6 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 String subCategoryName = ((TextView) v.findViewById(R.id.grid_item_label)).getText().toString();
                 g.setSubCategoryName(subCategoryName);
-                g.setSearchKeys(g.getCategoryName() + " " + subCategoryName);
-                //Toast.makeText(getApplicationContext(),subCategoryName, Toast.LENGTH_SHORT).show();
                 new LoadPlaces(SubcategoryActivity.this, SubcategoryActivity.this).execute(g.getSearchKeys());
             }
         });

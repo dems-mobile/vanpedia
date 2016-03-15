@@ -73,10 +73,10 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
 
     /**
      * After completing background task Dismiss the progress dialog
-     * and show the data in UI
-     * Always use runOnUiThread(new Runnable()) to update UI from background
-     * thread, otherwise you will get error
-     * **/
+    * and show the data in UI
+    * Always use runOnUiThread(new Runnable()) to update UI from background
+    * thread, otherwise you will get error
+    * **/
     protected void onPostExecute(String file_url) {
         // dismiss the dialog after getting all products
         pDialog.dismiss();

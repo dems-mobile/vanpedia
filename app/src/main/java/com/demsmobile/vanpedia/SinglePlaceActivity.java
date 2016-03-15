@@ -2,6 +2,7 @@ package com.demsmobile.vanpedia;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,34 +15,29 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.demsmobile.vanpedia.places.GooglePlaces;
 import com.demsmobile.vanpedia.places.PlaceDetails;
 import com.demsmobile.vanpedia.util.AlertManager;
 
 public class SinglePlaceActivity extends Activity {
-    // flag for Internet connection status
+
     Boolean isInternetPresent = false;
-
-    // Connection detector class
-    //ConnectionDetector cd;
-
-    // Alert Dialog Manager
-    //AlertDialogManager alert = new AlertDialogManager();
     AlertManager alert = new AlertManager();
-   // AlertDialog alert = new AlertDialog(am);
-    // Google Places
     GooglePlaces googlePlaces;
-
     // Place Details
     PlaceDetails placeDetails;
-
     // Progress dialog
     ProgressDialog pDialog;
-
     // KEY Strings
     public static String KEY_REFERENCE = "reference"; // id of the place
+    ImageButton dialBtn;
+    TextView numTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +45,37 @@ public class SinglePlaceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_place);
 
+        dialBtn = (ImageButton) findViewById(R.id.callButton);
+        numTxt = (TextView) findViewById(R.id.phone);
+        //String numTxt = phone.getText().toString();
+
         Intent i = getIntent();
 
-        // Place referece id
         String reference = i.getStringExtra(KEY_REFERENCE);
 
-        // Calling a Async Background thread
         new LoadSinglePlaceDetails().execute(reference);
-    }
 
+        //set up call branch
+        dialBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    if (numTxt != null) {              //(numTxt.getText().length()==10||numTxt.getText().length()==11
+                        startActivity(new Intent(Intent.ACTION_CALL,
+                                Uri.parse("tel:" + numTxt.getText())));
+                    }else if(numTxt != null && numTxt.getText().length()==0){
+                        Toast.makeText(getApplicationContext(),
+                                "You missed to type the number!", Toast.LENGTH_SHORT).show();
+                    }else if(numTxt != null &&
+                            numTxt.getText().length()<10){
+                        Toast.makeText(getApplicationContext(), "Error, feature not available",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("DialerAppActivity", "error: " +
+                            e.getMessage(),e);//Runtime error will be logged
+                }
+            }
+        });
+    }
 
     /**
      * Background Async Task to Load Google places

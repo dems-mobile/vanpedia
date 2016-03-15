@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dip">
+    android:padding="10dip"
+    android:background="#ff202020">
 
     <!-- Name Label -->
     <TextView
@@ -12,18 +13,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:layout_marginBottom="5dip"
+        android:textColor="#ffffff"
         android:textStyle="bold"/>
 
     <!--  Name Value -->
     <TextView
         android:id="@+id/name"
         android:layout_width="fill_parent"
+        android:textColor="#ffffff"
         android:layout_height="wrap_content"/>
 
     <!-- Address Label -->
     <TextView
         android:text="Address:"
         android:layout_width="fill_parent"
+        android:textColor="#ffffff"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dip"
         android:layout_marginBottom="5dip"
@@ -33,13 +37,22 @@
     <TextView
         android:id="@+id/address"
         android:layout_width="fill_parent"
+        android:textColor="#ffffff"
         android:layout_height="wrap_content"/>
 
     <!-- Phone Number Label -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/callButton"
+        android:layout_gravity="right"
+        android:src="@drawable/phone" />
+
     <TextView
         android:id="@+id/phone"
-        android:layout_width="fill_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:layout_marginTop="10dip"/>
 
 
@@ -48,6 +61,7 @@
         android:id="@+id/location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:layout_marginTop="15dip"
         android:layout_marginBottom="5dip"/>
 

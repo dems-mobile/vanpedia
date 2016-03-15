@@ -1,6 +1,8 @@
 package com.demsmobile.vanpedia;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +50,12 @@ public class CustomListAdapter extends BaseAdapter {
             holder.addressView = (TextView) convertView.findViewById(R.id.address);
             holder.phoneView = (TextView) convertView.findViewById(R.id.phone);
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         holder.nameView.setText(listData.get(position).name);
-        holder.addressView.setText("By, " + listData.get(position).formatted_address);
+        holder.addressView.setText(listData.get(position).formatted_address);
         holder.phoneView.setText(listData.get(position).formatted_phone_number);
         return convertView;
     }
@@ -62,6 +64,7 @@ public class CustomListAdapter extends BaseAdapter {
         TextView nameView;
         TextView addressView;
         TextView phoneView;
+
     }
 }
 

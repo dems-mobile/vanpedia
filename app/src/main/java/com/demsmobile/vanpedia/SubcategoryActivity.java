@@ -92,12 +92,6 @@ public class SubcategoryActivity extends Activity implements ServiceCallback<Lis
         Intent intent = new Intent(SubcategoryActivity.this, ListActivity.class);
         intent.putExtra("PlacesArray", (Serializable) places);   //(Parcelable) places
         startActivity(intent);
-
-        /* String ref = places.get(0).reference.toString();                           //returns googleID to grab details
-            String vicin = places.get(0).vicinity.toString();                          //returns Surrey for every icon
-            String phone = places.get(0).formatted_phone_number.toString();            //crashes
-            Toast.makeText(this, phone + " " , Toast.LENGTH_SHORT).show();     */        //  " " + vicin + " " + phone
-
     }
 
     @Override

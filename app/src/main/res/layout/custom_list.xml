@@ -8,5 +8,7 @@
         android:id="@+id/custom_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:dividerHeight="1dp" />
+
 </LinearLayout>

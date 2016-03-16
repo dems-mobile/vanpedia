@@ -1,69 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dip"
-    android:background="#ff202020">
+    android:background="#ff202020"
+    android:weightSum="1">
 
-    <!-- Name Label -->
-    <TextView
-        android:text="Name:"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:layout_marginBottom="5dip"
-        android:textColor="#ffffff"
-        android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:orientation="vertical"
+        android:padding="10dip"
+        android:background="#ff202020">
 
-    <!--  Name Value -->
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:textColor="#ffffff"
-        android:layout_height="wrap_content"/>
+        <!-- Name Label -->
 
-    <!-- Address Label -->
-    <TextView
-        android:text="Address:"
-        android:layout_width="fill_parent"
-        android:textColor="#ffffff"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
-        android:layout_marginBottom="5dip"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
-    <!--  Address Value -->
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="fill_parent"
-        android:textColor="#ffffff"
-        android:layout_height="wrap_content"/>
-
-    <!-- Phone Number Label -->
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/callButton"
-        android:layout_gravity="right"
-        android:src="@drawable/phone" />
-
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:layout_marginTop="10dip"/>
+        <!-- Address Label -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:textColor="#ffffff"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:id="@+id/textView5"
+            android:paddingTop="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Address:"
+            android:layout_below="@+id/name" />
 
 
-    <!-- Location Value -->
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:layout_marginTop="15dip"
-        android:layout_marginBottom="5dip"/>
+        <!-- Phone Number Label -->
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/callButton"
+            android:layout_gravity="right"
+            android:src="@drawable/phone"
+            android:background="#ff202020"
+            android:layout_marginRight="41dp"
+            android:layout_marginEnd="41dp"
+            android:layout_alignTop="@+id/imageButton"
+            android:layout_toLeftOf="@+id/imageButton"
+            android:layout_toStartOf="@+id/imageButton" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_alignBottom="@+id/callButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <!-- Location Value -->
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:id="@+id/address"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView5"
+            android:layout_above="@+id/callButton" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageButton"
+            android:src="@drawable/starwhite"
+            android:background="#ff202020"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/address"
+            android:layout_alignEnd="@+id/address" />
+    </RelativeLayout>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map" />
 
 
 </LinearLayout>

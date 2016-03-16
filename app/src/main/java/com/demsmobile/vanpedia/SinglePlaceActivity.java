@@ -2,9 +2,14 @@ package com.demsmobile.vanpedia;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,24 +25,32 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import com.demsmobile.vanpedia.places.GooglePlaces;
+import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.places.PlaceDetails;
+import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.util.AlertManager;
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SinglePlaceActivity extends Activity {
+public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback{
 
-    Boolean isInternetPresent = false;
     AlertManager alert = new AlertManager();
     GooglePlaces googlePlaces;
-    // Place Details
     PlaceDetails placeDetails;
-    // Progress dialog
     ProgressDialog pDialog;
-    // KEY Strings
     public static String KEY_REFERENCE = "reference"; // id of the place
     ImageButton dialBtn;
     TextView numTxt;
+    private GoogleMap googleMap;
+    Location location;
+    Double lat;
+    Double lgn;
+    private static final float MIN_DISTANCE = 15;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,37 +58,61 @@ public class SinglePlaceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_place);
 
-        dialBtn = (ImageButton) findViewById(R.id.callButton);
-        numTxt = (TextView) findViewById(R.id.phone);
-        //String numTxt = phone.getText().toString();
-
         Intent i = getIntent();
-
         String reference = i.getStringExtra(KEY_REFERENCE);
 
         new LoadSinglePlaceDetails().execute(reference);
 
-        //set up call branch
+        dialBtn = (ImageButton) findViewById(R.id.callButton);
+        numTxt = (TextView) findViewById(R.id.phone);
         dialBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    if (numTxt != null) {              //(numTxt.getText().length()==10||numTxt.getText().length()==11
+                    if (numTxt != null) {
                         startActivity(new Intent(Intent.ACTION_CALL,
                                 Uri.parse("tel:" + numTxt.getText())));
-                    }else if(numTxt != null && numTxt.getText().length()==0){
+                    } else if (numTxt != null && numTxt.getText().length() == 0) {
                         Toast.makeText(getApplicationContext(),
                                 "You missed to type the number!", Toast.LENGTH_SHORT).show();
-                    }else if(numTxt != null &&
-                            numTxt.getText().length()<10){
-                        Toast.makeText(getApplicationContext(), "Error, feature not available",Toast.LENGTH_SHORT).show();
+                    } else if (numTxt != null &&
+                            numTxt.getText().length() < 10) {
+                        Toast.makeText(getApplicationContext(), "Error, feature not available", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Log.e("DialerAppActivity", "error: " +
-                            e.getMessage(),e);//Runtime error will be logged
+                            e.getMessage(), e);//Runtime error will be logged
                 }
             }
         });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap){
+
+        if(lat == null || lgn == null){  //doesn't return these co-ordinates so maybe it's not null???
+            lat = 49.2332052;
+            lgn = -122.8527942;
+        }
+        else {
+            LatLng marker = new LatLng(lat, lgn);  //49.2332052,-122.8527942
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker, MIN_DISTANCE);
+            googleMap.addMarker(new MarkerOptions().position(marker).title("Destination"));
+            googleMap.moveCamera(cameraUpdate);
+        }
+
+        if (googleMap == null) {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+    }
+
 
     /**
      * Background Async Task to Load Google places
@@ -94,7 +131,6 @@ public class SinglePlaceActivity extends Activity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
-
         /**
          * getting Profile JSON
          * */
@@ -118,6 +154,7 @@ public class SinglePlaceActivity extends Activity {
          * After completing background task Dismiss the progress dialog
          * **/
         protected void onPostExecute(String file_url) {
+
             // dismiss the dialog after getting all products
             pDialog.dismiss();
             // updating UI from Background Thread
@@ -126,78 +163,79 @@ public class SinglePlaceActivity extends Activity {
                     /**
                      * Updating parsed Places into LISTVIEW
                      * */
-                    if(placeDetails != null){
+                    if (placeDetails != null) {
                         String status = placeDetails.status;
 
                         // check place deatils status
                         // Check for all possible status
-                        if(status.equals("OK")){
+                        if (status.equals("OK")) {
                             if (placeDetails.result != null) {
                                 String name = placeDetails.result.name;
                                 String address = placeDetails.result.formatted_address;
                                 String phone = placeDetails.result.formatted_phone_number;
-                                String latitude = Double.toString(placeDetails.result.geometry.location.lat);
-                                String longitude = Double.toString(placeDetails.result.geometry.location.lng);
+                                lat = placeDetails.result.geometry.location.lat;
+                                lgn = placeDetails.result.geometry.location.lng;
 
-                                Log.d("Place ", name + address + phone + latitude + longitude);
+                                System.out.println("Lat and Long are: " + lat + lgn); //TESTING
+
+                                // Log.d("Place ", name + address + phone + latitude + longitude);
 
                                 // Displaying all the details in the view
                                 // single_place.xml
                                 TextView lbl_name = (TextView) findViewById(R.id.name);
                                 TextView lbl_address = (TextView) findViewById(R.id.address);
                                 TextView lbl_phone = (TextView) findViewById(R.id.phone);
-                                TextView lbl_location = (TextView) findViewById(R.id.location);
+                                //TextView lbl_location = (TextView) findViewById(R.id.location);
 
                                 // Check for null data from google
                                 // Sometimes place details might missing
                                 name = name == null ? "Not present" : name; // if name is null display as "Not present"
                                 address = address == null ? "Not present" : address;
                                 phone = phone == null ? "Not present" : phone;
-                                latitude = latitude == null ? "Not present" : latitude;
-                                longitude = longitude == null ? "Not present" : longitude;
+                                //latitude = latitude == null ? "Not present" : latitude;
+                                // longitude = longitude == null ? "Not present" : longitude;
 
                                 lbl_name.setText(name);
                                 lbl_address.setText(address);
                                 lbl_phone.setText(Html.fromHtml("<b>Phone:</b> " + phone));
-                                lbl_location.setText(Html.fromHtml("<b>Latitude:</b> " + latitude + ", <b>Longitude:</b> " + longitude));
+                                // lbl_location.setText(Html.fromHtml("<b>Latitude:</b> " + latitude + ", <b>Longitude:</b> " + longitude));
+
+//                                try {
+//                                    // Loading map
+//                                    onMapReady(googleMap);
+//
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
                             }
-                        }
-                        else if(status.equals("ZERO_RESULTS")){
+
+
+                        } else if (status.equals("ZERO_RESULTS")) {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Near Places",
                                     "Sorry no place found.",
                                     false);
-                        }
-                        else if(status.equals("UNKNOWN_ERROR"))
-                        {
+                        } else if (status.equals("UNKNOWN_ERROR")) {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                     "Sorry unknown error occured.",
                                     false);
-                        }
-                        else if(status.equals("OVER_QUERY_LIMIT"))
-                        {
+                        } else if (status.equals("OVER_QUERY_LIMIT")) {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                     "Sorry query limit to google places is reached",
                                     false);
-                        }
-                        else if(status.equals("REQUEST_DENIED"))
-                        {
+                        } else if (status.equals("REQUEST_DENIED")) {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                     "Sorry error occured. Request is denied",
                                     false);
-                        }
-                        else if(status.equals("INVALID_REQUEST"))
-                        {
+                        } else if (status.equals("INVALID_REQUEST")) {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                     "Sorry error occured. Invalid Request",
                                     false);
-                        }
-                        else
-                        {
+                        } else {
                             alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                     "Sorry error occured.",
                                     false);
                         }
-                    }else{
+                    } else {
                         alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
                                 "Sorry error occured.",
                                 false);
@@ -206,6 +244,7 @@ public class SinglePlaceActivity extends Activity {
 
                 }
             });
+
 
         }
 

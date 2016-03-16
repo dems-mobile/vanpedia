@@ -44,19 +44,19 @@ public class Globals{
         keywords.put("Hotel", "hotel");
         keywords.put("B&B", "bed and breakfast|B&B");
         keywords.put("Hostel", "hostel");
-        keywords.put("Rent", "rent condo|rent apartment|rent bedroom|rent room");
-        keywords.put("Fine", "restaurant fine");
-        keywords.put("Casual", "restaurant casual");
+        keywords.put("Rent", "condo for rent|apartment for rent|bedroom|room");
+        keywords.put("Fine", "restaurant fine dinning");
+        keywords.put("Casual", "restaurant casual dinning");
         keywords.put("Pub", "restaurant pub");
-        keywords.put("Breakfast", "restaurant breakfast");
+        keywords.put("Breakfast", "restaurant breakfast food");
         keywords.put("Bistro", "restaurant bistro");
-        keywords.put("Coffee", "restaurant coffee");
-        keywords.put("Concert", "show concert");
-        keywords.put("Night Life", "show night");
+        keywords.put("Coffee", "restaurant coffee shop");
+        keywords.put("Concert", "entertainment concert");
+        keywords.put("Night Life", "night club");
         keywords.put("Beach", "beach lake");
         keywords.put("Sport", "sport");
         keywords.put("Bike", "sport bike|rental bike");
-        keywords.put("Hike", "sport hike");
+        keywords.put("Hike", "trails|sky resort");
         keywords.put("Mountain", "sky resort");
     }
 }

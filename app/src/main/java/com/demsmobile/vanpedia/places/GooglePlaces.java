@@ -27,10 +27,10 @@ public class GooglePlaces {
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
     // Google API Key
-    private static final String API_KEY = "AIzaSyCRLa4LQZWNQBcjCYcIVYA45i9i8zfClqc";
+    private static final String API_KEY = "AIzaSyAY5H67_Nuvb40ISHt21LGHGN60SJcXN4c";
 
     // Google Places serach url's
-    private static final String PLACES_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
+    private static final String PLACES_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
     private static final String PLACES_TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
     private static final String PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
@@ -46,7 +46,7 @@ public class GooglePlaces {
      * @param types - type of place to search
      * @return list of places
      * */
-    public PlacesList search(double latitude, double longitude, double radius, String types)
+    public PlacesList search(double latitude, double longitude, double radius, String keywords)
             throws Exception {
 
         this._latitude = latitude;
@@ -61,9 +61,11 @@ public class GooglePlaces {
             request.getUrl().put("key", API_KEY);
             request.getUrl().put("location", _latitude + "," + _longitude);
             request.getUrl().put("radius", _radius); // in meters
-            request.getUrl().put("sensor", "false");
-            if(types != null)
-                request.getUrl().put("types", types);
+            request.getUrl().put("sensor", "true");
+            if(keywords != null)
+                request.getUrl().put("keyword", keywords);
+
+            Log.d(TAG, request.getUrl().toString());
 
             PlacesList list = request.execute().parseAs(PlacesList.class);
             // Check log cat for places response status

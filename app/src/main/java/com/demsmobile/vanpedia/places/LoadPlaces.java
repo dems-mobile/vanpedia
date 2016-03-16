@@ -28,6 +28,9 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
     private PlacesList nearPlaces;
     private ServiceCallback callback;
 
+    // Radius in meters - increase this value if you don't find any places
+    private double RARIUS = 10000; // 1000 meters
+
     public LoadPlaces(Context c, ServiceCallback<List<Place>> callback){
         this.context = c;
         this.callback = callback;
@@ -54,16 +57,10 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
         googlePlaces = new GooglePlaces();
 
         try {
-
-            // Radius in meters - increase this value if you don't find any places
-            double radius = 1000; // 1000 meters
-
             Location location = LocationService.getInstance(context).getLocation();
 
             // get nearest places
-            nearPlaces = googlePlaces.search(location.getLatitude(), location.getLongitude(), radius, args[0]);
-
-
+            nearPlaces = googlePlaces.search(location.getLatitude(), location.getLongitude(), RARIUS, args[0]);
 
         } catch (Exception e) {
             e.printStackTrace();

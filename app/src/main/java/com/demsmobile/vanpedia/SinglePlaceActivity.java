@@ -36,7 +36,7 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback{
+public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback {
 
     AlertManager alert = new AlertManager();
     GooglePlaces googlePlaces;
@@ -84,35 +84,22 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                 }
             }
         });
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap){
 
-        if(lat == null || lgn == null){  //doesn't return these co-ordinates so maybe it's not null???
-            lat = 49.2332052;
-            lgn = -122.8527942;
-        }
-        else {
-            LatLng marker = new LatLng(lat, lgn);  //49.2332052,-122.8527942
+            LatLng marker = new LatLng(lat, lgn);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker, MIN_DISTANCE);
             googleMap.addMarker(new MarkerOptions().position(marker).title("Destination"));
             googleMap.moveCamera(cameraUpdate);
-        }
 
         if (googleMap == null) {
                 Toast.makeText(getApplicationContext(),
                         "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                         .show();
             }
-
     }
-
 
     /**
      * Background Async Task to Load Google places
@@ -166,8 +153,6 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                     if (placeDetails != null) {
                         String status = placeDetails.status;
 
-                        // check place deatils status
-                        // Check for all possible status
                         if (status.equals("OK")) {
                             if (placeDetails.result != null) {
                                 String name = placeDetails.result.name;
@@ -176,37 +161,19 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 lat = placeDetails.result.geometry.location.lat;
                                 lgn = placeDetails.result.geometry.location.lng;
 
-                                System.out.println("Lat and Long are: " + lat + lgn); //TESTING
 
-                                // Log.d("Place ", name + address + phone + latitude + longitude);
-
-                                // Displaying all the details in the view
-                                // single_place.xml
                                 TextView lbl_name = (TextView) findViewById(R.id.name);
                                 TextView lbl_address = (TextView) findViewById(R.id.address);
                                 TextView lbl_phone = (TextView) findViewById(R.id.phone);
-                                //TextView lbl_location = (TextView) findViewById(R.id.location);
 
-                                // Check for null data from google
-                                // Sometimes place details might missing
                                 name = name == null ? "Not present" : name; // if name is null display as "Not present"
                                 address = address == null ? "Not present" : address;
                                 phone = phone == null ? "Not present" : phone;
-                                //latitude = latitude == null ? "Not present" : latitude;
-                                // longitude = longitude == null ? "Not present" : longitude;
 
                                 lbl_name.setText(name);
                                 lbl_address.setText(address);
                                 lbl_phone.setText(Html.fromHtml("<b>Phone:</b> " + phone));
-                                // lbl_location.setText(Html.fromHtml("<b>Latitude:</b> " + latitude + ", <b>Longitude:</b> " + longitude));
 
-//                                try {
-//                                    // Loading map
-//                                    onMapReady(googleMap);
-//
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
                             }
 
 
@@ -241,10 +208,12 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 false);
                     }
 
+                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.map);
+                    mapFragment.getMapAsync(SinglePlaceActivity.this);
 
                 }
             });
-
 
         }
 

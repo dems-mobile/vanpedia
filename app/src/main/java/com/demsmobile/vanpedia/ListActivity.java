@@ -54,8 +54,9 @@ public class ListActivity extends Activity {
             Place placeData = new Place();
             placeData.reference = placesList.get(i).reference;  //needed for Single Place Activity
             placeData.name = placesList.get(i).name;
-            placeData.formatted_address = placesList.get(i).formatted_address;
-            placeData.formatted_phone_number = placesList.get(i).formatted_phone_number;
+           // placeData.photos = placesList.get(i).photos;
+           // placeData.formatted_address = placesList.get(i).formatted_address;
+           // placeData.formatted_phone_number = placesList.get(i).formatted_phone_number;
             results.add(placeData);
         }
         return results;

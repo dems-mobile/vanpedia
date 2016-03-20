@@ -36,6 +36,8 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.w3c.dom.Text;
+
 public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback {
 
     AlertManager alert = new AlertManager();
@@ -44,7 +46,9 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
     ProgressDialog pDialog;
     public static String KEY_REFERENCE = "reference"; // id of the place
     ImageButton dialBtn;
+    ImageButton starBtn;
     TextView numTxt;
+    TextView placeTitle;
     private GoogleMap googleMap;
     Location location;
     Double lat;
@@ -71,12 +75,6 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                     if (numTxt != null) {
                         startActivity(new Intent(Intent.ACTION_CALL,
                                 Uri.parse("tel:" + numTxt.getText())));
-                    } else if (numTxt != null && numTxt.getText().length() == 0) {
-                        Toast.makeText(getApplicationContext(),
-                                "You missed to type the number!", Toast.LENGTH_SHORT).show();
-                    } else if (numTxt != null &&
-                            numTxt.getText().length() < 10) {
-                        Toast.makeText(getApplicationContext(), "Error, feature not available", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Log.e("DialerAppActivity", "error: " +
@@ -84,6 +82,22 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                 }
             }
         });
+
+        starBtn = (ImageButton) findViewById(R.id.starButton);
+        placeTitle = (TextView) findViewById(R.id.name);
+        starBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TO:DO
+                //add to favourites
+                // starBtn.setImage (isPlaceAFavourite ? : yellowStar : whiteStar);
+                Toast.makeText(getApplicationContext(),
+                        placeTitle.getText() + " has been saved", Toast.LENGTH_SHORT).show();
+
+                starBtn.setImageResource(R.drawable.staryellow);
+            }
+        });
+
     }
 
     @Override
@@ -158,6 +172,7 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 String name = placeDetails.result.name;
                                 String address = placeDetails.result.formatted_address;
                                 String phone = placeDetails.result.formatted_phone_number;
+                                String website = placeDetails.result.website;
                                 lat = placeDetails.result.geometry.location.lat;
                                 lgn = placeDetails.result.geometry.location.lng;
 
@@ -165,14 +180,19 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 TextView lbl_name = (TextView) findViewById(R.id.name);
                                 TextView lbl_address = (TextView) findViewById(R.id.address);
                                 TextView lbl_phone = (TextView) findViewById(R.id.phone);
+                                TextView lbl_website = (TextView) findViewById(R.id.website);
 
                                 name = name == null ? "Not present" : name; // if name is null display as "Not present"
                                 address = address == null ? "Not present" : address;
-                                phone = phone == null ? "Not present" : phone;
+                                phone = phone == null ? "No Number" : phone;
+                                website = website == null ? "No website found" : website;
 
                                 lbl_name.setText(name);
                                 lbl_address.setText(address);
+                                lbl_website.setText(website);
                                 lbl_phone.setText(Html.fromHtml("<b>Phone:</b> " + phone));
+
+
 
                             }
 

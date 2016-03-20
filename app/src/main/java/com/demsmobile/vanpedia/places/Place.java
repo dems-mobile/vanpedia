@@ -3,6 +3,9 @@ package com.demsmobile.vanpedia.places;
 /**
  * Created by Diego on 3/4/2016.
  */
+import android.provider.Contacts;
+import android.provider.ContactsContract;
+
 import com.google.api.client.util.Key;
 
 import java.io.Serializable;
@@ -19,6 +22,9 @@ public class Place implements Serializable {
     @Key
     public String name;
 
+//    @Key
+//    public String photos;
+
     @Key
     public String reference;
 
@@ -27,6 +33,9 @@ public class Place implements Serializable {
 
     @Key
     public String vicinity;
+
+    @Key
+    public String website;
 
     @Key
     public Geometry geometry;

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.Log;
 
 import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.service.ServiceCallback;
@@ -61,7 +62,6 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
 
             // get nearest places
             nearPlaces = googlePlaces.search(location.getLatitude(), location.getLongitude(), RARIUS, args[0]);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,6 +87,7 @@ public class LoadPlaces extends AsyncTask<String, String, String> {
                     // Successfully got places details
                     if (nearPlaces.results != null) {
                         // loop through each place
+                        Log.e("===========", nearPlaces.results.toString());
                         callback.serviceSuccess(nearPlaces.results);
                     }
                 } else {

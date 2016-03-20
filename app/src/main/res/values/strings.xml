@@ -27,6 +27,7 @@
     <string name="title_activity_reference">References</string>
     <string name="title_activity_list">Search Results</string>
     <string name="title_activity_single_place">SinglePlaceActivity</string>
+    <string name="title_activity_destination">DestinationActivity</string>
 
 
 

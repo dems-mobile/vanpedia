@@ -8,8 +8,8 @@ import android.provider.BaseColumns;
 public interface DataAccessObject extends BaseColumns {
 
 //    public static final String TABLE_PK = "id";
-//    public static final String COLLUMN_UUID = "uuid"; // not sure if needed
-    public static final String COLLUMN_CREATED_AT = "created_at";
-    public static final String COLLUMN_UPDATED_AT = "updated_at";
+//    public static final String COLUMN_UUID = "uuid"; // not sure if needed
+    public static final String COLUMN_CREATED_AT = "created_at";
+    public static final String COLUMN_UPDATED_AT = "updated_at";
 
 }

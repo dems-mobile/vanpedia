@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.demsmobile.vanpedia.service.LocationService;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +29,8 @@ public class SplashActivity extends ActionBarActivity {
 
         Timer opening = new Timer();
         opening.schedule(task, 2000);
+
+        LocationService.getInstance(this);
     }
 
 

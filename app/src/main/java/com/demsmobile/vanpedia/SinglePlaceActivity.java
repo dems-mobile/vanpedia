@@ -1,42 +1,28 @@
 package com.demsmobile.vanpedia;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.Context;
 import android.location.Location;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+
+import com.demsmobile.vanpedia.database.MySQLiteHelper;
+import com.demsmobile.vanpedia.database.PlacesContract;
 import com.demsmobile.vanpedia.places.GooglePlaces;
-import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.places.PlaceDetails;
-import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.util.AlertManager;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.w3c.dom.Text;
 
 public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,6 +40,7 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
     Double lat;
     Double lgn;
     private static final float MIN_DISTANCE = 15;
+    private boolean isFavority;
 
 
     @Override
@@ -91,10 +78,28 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                 //TO:DO
                 //add to favourites
                 // starBtn.setImage (isPlaceAFavourite ? : yellowStar : whiteStar);
-                Toast.makeText(getApplicationContext(),
-                        placeTitle.getText() + " has been saved", Toast.LENGTH_SHORT).show();
 
-                starBtn.setImageResource(R.drawable.staryellow);
+                PlacesContract placesDbHelper = new PlacesContract(new MySQLiteHelper(getApplicationContext()));
+
+                if (!isFavority) {
+                    if (placesDbHelper.createPlace(placeDetails.result) != -1) {
+                        isFavority = true;
+
+                        Toast.makeText(getApplicationContext(),
+                                placeTitle.getText() + " has been saved", Toast.LENGTH_SHORT).show();
+
+                        starBtn.setImageResource(R.drawable.staryellow);
+
+                    }
+                } else {
+                    if (placesDbHelper.deletePlace(placeDetails.result) > 0) {
+                        isFavority = false;
+                        Toast.makeText(getApplicationContext(),
+                                placeTitle.getText() + " has been removed", Toast.LENGTH_SHORT).show();
+
+                        starBtn.setImageResource(R.drawable.starwhite);
+                    }
+                }
             }
         });
 
@@ -193,6 +198,14 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 lbl_phone.setText(Html.fromHtml("<b>Phone:</b> " + phone));
 
 
+                                PlacesContract placesDbHelper = new PlacesContract(new MySQLiteHelper(getApplicationContext()));
+                                if (placesDbHelper.findPlace(placeDetails.result.id) == null) {
+                                    isFavority = false;
+                                    starBtn.setImageResource(R.drawable.starwhite);
+                                } else {
+                                    isFavority = true;
+                                    starBtn.setImageResource(R.drawable.staryellow);
+                                }
 
                             }
 

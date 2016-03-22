@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
+import com.demsmobile.vanpedia.service.Destination;
+import com.demsmobile.vanpedia.service.DestinationList;
 import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.service.ServiceCallback;
@@ -49,10 +51,13 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     private YahooWeatherService weatherService;
     private LocationService locationService;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
         temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demsmobile.vanpedia.service.Destination;
@@ -19,7 +20,6 @@ import java.util.List;
 public class TopDestination extends ActionBarActivity {
 
     ArrayList<Destination> place_list;
-    String [] images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +40,19 @@ public class TopDestination extends ActionBarActivity {
         String phone = place_list.get(2).toString();
         String website = place_list.get(3).toString();
         String description = place_list.get(4).toString();
+        int [] images = place_list.get(5).images();
 
-        //String images = place_list.get(5).toString();  returns an array not a string
 
+
+        ImageView lbl_mainImage = (ImageView) findViewById(R.id.imgMain);
         TextView lbl_name = (TextView) findViewById(R.id.name);
         TextView lbl_address = (TextView) findViewById(R.id.address);
         TextView lbl_phone = (TextView) findViewById(R.id.phone);
         TextView lbl_website = (TextView) findViewById(R.id.website);
         TextView lbl_description = (TextView) findViewById(R.id.description);
 
+
+        lbl_mainImage.setImageResource(images[0]);
         lbl_name.setText(name);
         lbl_address.setText(address);
         lbl_website.setText(website);

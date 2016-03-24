@@ -30,6 +30,7 @@ import com.demsmobile.vanpedia.service.ServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,13 +52,14 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     private YahooWeatherService weatherService;
     private LocationService locationService;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Globals g = Globals.getInstance();
+      //  ArrayList<Destination> xxx = new DestinationList().createList();
+      //  g.setDestList(xxx);
 
         weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
         temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);

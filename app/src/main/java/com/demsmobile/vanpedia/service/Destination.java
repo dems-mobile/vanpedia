@@ -13,9 +13,9 @@ public class Destination {
     String phone;
     String email;
     String description;
-    String [] images;
+    int [] images;
 
-    public Destination(String n, String l, String p, String e, String d, String [] img ){
+    public Destination(String n, String l, String p, String e, String d, int [] img ){
 
         dest_name = n;
         dest_location = l;
@@ -41,9 +41,7 @@ public class Destination {
     public String description(){
         return description;
     }
-    public String[] images(String[] array) {
-        return array;
-    }
+    public int[] images() {return images;}
 
     //set
     public void setDest_name(String n){
@@ -61,7 +59,7 @@ public class Destination {
     public void setDescription(String d){
         description = d;
     }
-    public void setImages(String [] img){images = img;
+    public void setImages(int [] img){images = img;
     }
 
 

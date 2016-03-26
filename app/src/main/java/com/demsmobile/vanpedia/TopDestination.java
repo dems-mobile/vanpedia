@@ -1,33 +1,27 @@
 package com.demsmobile.vanpedia;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demsmobile.vanpedia.service.Destination;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.demsmobile.vanpedia.service.Globals;
 
 
 public class TopDestination extends ActionBarActivity {
 
-    ArrayList<Destination> place_list;
+    //ArrayList<Destination> place_list;
+    Destination place_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_destination);
 
-        place_list = (ArrayList<Destination>)getIntent().getSerializableExtra("dest_Array");
-
+        Globals g = Globals.getInstance();
+//        place_list = (ArrayList<Destination>)getIntent().getSerializableExtra("dest_Array");
+        place_list = g.getTopPlaceToShow();
         // 0    "Stanley Park",
         // 1    "735 Stanley Park Drive, Stanley Park, Vancouver, BC V6C 2T1",
         // 2    "604-681-5115",
@@ -35,12 +29,12 @@ public class TopDestination extends ActionBarActivity {
         // 4    d0,
         // 5    destImg[0]) --> {"d00","d01","d02"}
 
-        String name = place_list.get(0).toString();
-        String address = place_list.get(1).toString();
-        String phone = place_list.get(2).toString();
-        String website = place_list.get(3).toString();
-        String description = place_list.get(4).toString();
-        int [] images = place_list.get(5).images();
+        String name = place_list.dest_name().toString();
+        String address = place_list.dest_location().toString();
+        String phone = place_list.phone().toString();
+        String website = place_list.website();
+        String description = place_list.description().toString();
+        int [] images = place_list.images();
 
 
 

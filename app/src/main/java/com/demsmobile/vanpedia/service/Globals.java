@@ -1,6 +1,5 @@
 package com.demsmobile.vanpedia.service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +8,7 @@ public class Globals{
     private static Globals instance;
 
     // Global variable
+    private Destination topPlaceToShow;
     private String categoryName;
     private String subCategoryName;
     private ArrayList<Destination> destList;
@@ -70,4 +70,10 @@ public class Globals{
         return destList;
     }
 
+    public void setTopPlaceToShow(Destination d){
+        topPlaceToShow = d;
+    }
+    public Destination getTopPlaceToShow(){
+        return topPlaceToShow;
+    }
 }

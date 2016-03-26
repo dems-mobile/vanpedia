@@ -58,8 +58,13 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
         setContentView(R.layout.activity_main);
 
         Globals g = Globals.getInstance();
-      //  ArrayList<Destination> xxx = new DestinationList().createList();
-      //  g.setDestList(xxx);
+        //ArrayList<Destination>
+        DestinationList DistList = new DestinationList();
+        DistList.createList();
+        g.setDestList(DistList.getList());
+
+        ArrayList<Destination> x = g.getDestList();
+
 
         weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
         temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);

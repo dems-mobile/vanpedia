@@ -1,21 +1,19 @@
 package com.demsmobile.vanpedia.service;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 /**
  * Created by Michelle on 2016-03-21.
  */
 public class Destination {
 
-    String dest_name;
-    String dest_location;
-    String phone;
-    String email;
-    String description;
-    int [] images;
+    private String dest_name;
+    private String dest_location;
+    private String phone;
+    private String email;
+    private String description;
+    private int [] images;
+    private String website;
 
-    public Destination(String n, String l, String p, String e, String d, int [] img ){
+    public Destination(String n, String l, String p, String e, String d, int [] img, String www){
 
         dest_name = n;
         dest_location = l;
@@ -23,12 +21,14 @@ public class Destination {
         email = e;
         description = d;
         images = img;
+        website = www;
     }
 
     //get
     public String dest_name(){
         return dest_name;
     }
+
     public String dest_location(){
         return dest_location;
     }
@@ -42,6 +42,9 @@ public class Destination {
         return description;
     }
     public int[] images() {return images;}
+    public String website(){
+        return website;
+    }
 
     //set
     public void setDest_name(String n){
@@ -59,8 +62,7 @@ public class Destination {
     public void setDescription(String d){
         description = d;
     }
-    public void setImages(int [] img){images = img;
-    }
-
+    public void setImages(int [] img){images = img;}
+    public void setWebsite(String www){website = www;}
 
 }

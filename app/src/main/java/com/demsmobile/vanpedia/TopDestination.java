@@ -1,7 +1,10 @@
 package com.demsmobile.vanpedia;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,32 +14,24 @@ import com.demsmobile.vanpedia.service.Globals;
 
 public class TopDestination extends ActionBarActivity {
 
-    //ArrayList<Destination> place_list;
     Destination place_list;
+    String website;
+    String phone;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_destination);
-
         Globals g = Globals.getInstance();
-//        place_list = (ArrayList<Destination>)getIntent().getSerializableExtra("dest_Array");
         place_list = g.getTopPlaceToShow();
-        // 0    "Stanley Park",
-        // 1    "735 Stanley Park Drive, Stanley Park, Vancouver, BC V6C 2T1",
-        // 2    "604-681-5115",
-        // 3    "www.stanleypark.com",
-        // 4    d0,
-        // 5    destImg[0]) --> {"d00","d01","d02"}
-
         String name = place_list.dest_name().toString();
         String address = place_list.dest_location().toString();
-        String phone = place_list.phone().toString();
-        String website = place_list.website().toString();
+        phone = place_list.phone().toString();
+        website = place_list.website().toString();
         String description = place_list.description().toString();
-        int [] images = place_list.images();
-
-
+        int images = place_list.images();
+        email = place_list.email();
 
         ImageView lbl_mainImage = (ImageView) findViewById(R.id.imgMain);
         TextView lbl_name = (TextView) findViewById(R.id.name);
@@ -45,8 +40,7 @@ public class TopDestination extends ActionBarActivity {
         TextView lbl_website = (TextView) findViewById(R.id.website);
         TextView lbl_description = (TextView) findViewById(R.id.description);
 
-
-        lbl_mainImage.setImageResource(images[0]);
+        lbl_mainImage.setImageResource(images);
         lbl_name.setText(name);
         lbl_address.setText(address);
         lbl_website.setText(website);
@@ -54,5 +48,21 @@ public class TopDestination extends ActionBarActivity {
         lbl_description.setText(description);
     }
 
+    public void process(View view) {
+
+        if(view.getId() == R.id.imgCall) {
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phone)));
+        }
+        if(view.getId() == R.id.imgMail){
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setType("text/plain");
+            intent.setData(Uri.parse("mailto:"+email));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        if(view.getId() == R.id.imgHomePage){
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+website)));
+        }
+    }
 
 }

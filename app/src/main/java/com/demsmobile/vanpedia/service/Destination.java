@@ -13,38 +13,29 @@ public class Destination {
     private int [] images;
     private String website;
 
-    public Destination(String n, String l, String p, String e, String d, int [] img, String www){
+    public Destination(String n, String l, String p, String w, String d, int [] img){
 
         dest_name = n;
         dest_location = l;
         phone = p;
-        email = e;
+        website = w;
         description = d;
         images = img;
-        website = www;
     }
 
     //get
     public String dest_name(){
         return dest_name;
     }
-
     public String dest_location(){
         return dest_location;
     }
     public String phone(){
         return phone;
     }
-    public String email(){
-        return email;
-    }
-    public String description(){
-        return description;
-    }
+    public String website(){return website;}
+    public String description(){return description;}
     public int[] images() {return images;}
-    public String website(){
-        return website;
-    }
 
     //set
     public void setDest_name(String n){
@@ -53,16 +44,9 @@ public class Destination {
     public void setDest_location(String l){
         dest_location = l;
     }
-    public void setPhone(String p){
-        phone = p;
-    }
-    public void setEmail(String e){
-        email = e;
-    }
-    public void setDescription(String d){
-        description = d;
-    }
+    public void setPhone(String p){phone = p;}
+    public void setWebsite(String w){website = w;}
+    public void setDescription(String d){description = d;}
     public void setImages(int [] img){images = img;}
-    public void setWebsite(String www){website = www;}
 
 }

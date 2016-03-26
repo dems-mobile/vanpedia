@@ -32,7 +32,7 @@ public class TopDestination extends ActionBarActivity {
         String name = place_list.dest_name().toString();
         String address = place_list.dest_location().toString();
         String phone = place_list.phone().toString();
-        String website = place_list.website();
+        String website = place_list.website().toString();
         String description = place_list.description().toString();
         int [] images = place_list.images();
 

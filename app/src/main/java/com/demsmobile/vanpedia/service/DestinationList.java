@@ -36,11 +36,11 @@ public class DestinationList {
             " more than 200 major works by Emily Carr, the Group of Seven, Jeff Wall, Harry Callahan and Marc Chagall.";
 
     public void createList(){
-        topD.add(new Destination("Stanley Park", "735 Stanley Park Drive, Stanley Park, Vancouver, BC V6C 2T1","604-681-5115","www.stanleypark.com",d0, destImg[0], "www.stanly.ca"));
-        topD.add(new Destination("Science World", "1455 Quebec St, Vancouver, BC V6A 3Z7","604-443-7440","www.scienceworld.ca",d1, destImg[1], ""));
-        topD.add(new Destination("Grouse Mountain","6400 Nancy Greene Way North Vancouver, BC V7R 4K9","604-980-9311","www.grousemountain.com",d2,destImg[2], ""));
-        topD.add(new Destination("Capilano Suspension Bridge","3735 Capilano Road North Vancouver, BC Canada V7R 4J1","604-985-7474","www.capbridge.com",d3,destImg[3], ""));
-        topD.add(new Destination("Vancouver Art Gallery","750 Hornby Street Vancouver, British Columbia Canada V6Z 2H7","604-662-4719","www.vanartgallery.bc.ca",d4,destImg[4], ""));
+        topD.add(new Destination("Stanley Park", "735 Stanley Park Drive, Stanley Park, Vancouver, BC V6C 2T1","604-681-5115","www.stanleypark.com",d0, destImg[0]));
+        topD.add(new Destination("Science World", "1455 Quebec St, Vancouver, BC V6A 3Z7","604-443-7440","www.scienceworld.ca",d1, destImg[1]));
+        topD.add(new Destination("Grouse Mountain","6400 Nancy Greene Way North Vancouver, BC V7R 4K9","604-980-9311","www.grousemountain.com",d2,destImg[2]));
+        topD.add(new Destination("Capilano Bridge","3735 Capilano Road North Vancouver, BC Canada V7R 4J1","604-985-7474","www.capbridge.com",d3,destImg[3]));
+        topD.add(new Destination("Vancouver Art Gallery","750 Hornby Street Vancouver, British Columbia Canada V6Z 2H7","604-662-4719","www.vanartgallery.bc.ca",d4,destImg[4]));
     }
 
     public ArrayList<Destination> getList(){

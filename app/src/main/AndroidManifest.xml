@@ -68,7 +68,7 @@
         </activity>
         <activity
             android:name=".DestinationActivity"
-            android:label="@string/title_activity_destination" >
+            android:label="@string/title_activity_destination">
         </activity>
         <activity
             android:name=".TopDestination"

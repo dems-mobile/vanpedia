@@ -22,6 +22,10 @@ public class DestinationActivity extends ListActivity{
 
         String [] attractions = {"Stanley Park", "Science World", "Grouse Mountain", "Capilano Suspension Bridge", "Vancouver Art Gallery"};
         setListAdapter(new ArrayAdapter<String>(this, R.layout.activity_destination, R.id.top5,attractions));
+        ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+        lv.setBackgroundResource(R.drawable.vanevening);
+        lv.setCacheColorHint(0);
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id){

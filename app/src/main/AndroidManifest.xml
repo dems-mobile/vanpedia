@@ -66,6 +66,14 @@
             android:name=".SinglePlaceActivity"
             android:label="@string/title_activity_single_place" >
         </activity>
+        <activity
+            android:name=".DestinationActivity"
+            android:label="@string/title_activity_destination">
+        </activity>
+        <activity
+            android:name=".TopDestination"
+            android:label="@string/title_activity_top_destination" >
+        </activity>
     </application>
 
 </manifest>

@@ -22,12 +22,15 @@ import android.widget.Toast;
 
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
+import com.demsmobile.vanpedia.service.Destination;
+import com.demsmobile.vanpedia.service.DestinationList;
 import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.service.LocationService;
 import com.demsmobile.vanpedia.service.ServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Globals g = Globals.getInstance();
+        //ArrayList<Destination>
+        DestinationList DistList = new DestinationList();
+        DistList.createList();
+        g.setDestList(DistList.getList());
+
+        ArrayList<Destination> x = g.getDestList();
+
 
         weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
         temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);
@@ -97,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Sign In", "Liked Places", "About This App", "References"};
+        String[] osArray = { "Sign In", "Liked Places","Top 5 Picks", "About This App", "References"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -112,9 +124,12 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                         startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        startActivity(new Intent(MainActivity.this, DestinationActivity.class));
                         break;
                     case 3:
+                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        break;
+                    case 4:
                         startActivity(new Intent(MainActivity.this, ReferenceActivity.class));
                         break;
                 }

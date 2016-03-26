@@ -1,5 +1,6 @@
 package com.demsmobile.vanpedia.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,8 +8,10 @@ public class Globals{
     private static Globals instance;
 
     // Global variable
+    private Destination topPlaceToShow;
     private String categoryName;
     private String subCategoryName;
+    private ArrayList<Destination> destList;
 
     // Restrict the constructor from being instantiated
     private Globals(){}
@@ -58,5 +61,19 @@ public class Globals{
         keywords.put("Bike", "sport bike|rental bike");
         keywords.put("Hike", "trails|sky resort");
         keywords.put("Mountain", "sky resort");
+    }
+
+    public void setDestList(ArrayList<Destination> destinationArr){
+        this.destList=destinationArr;
+    }
+    public ArrayList<Destination> getDestList(){
+        return destList;
+    }
+
+    public void setTopPlaceToShow(Destination d){
+        topPlaceToShow = d;
+    }
+    public Destination getTopPlaceToShow(){
+        return topPlaceToShow;
     }
 }

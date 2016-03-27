@@ -46,17 +46,17 @@ public class ImageAdapter extends BaseAdapter {
 
             String subcategoryName = subcategoriesNames[position];
 
-//            switch(categoryName){
-//                case "eat":
-//                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#db3424")));
-//                    break;
-//                case "explore":
-//                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0eaee1")));
-//                    break;
-//                case "stay":
-//                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#71d300")));
-//                    break;
-//            }
+            switch(categoryName){
+                case "eat":
+                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
+                    break;
+                case "explore":
+                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#2196F3")));
+                    break;
+                case "stay":
+                    imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4CAF50")));
+                    break;
+            }
 
             switch(subcategoryName){
                 case "Fine":

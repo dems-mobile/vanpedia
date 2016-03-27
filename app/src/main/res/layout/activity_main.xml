@@ -63,7 +63,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:backgroundTint="#71d300"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButtonStay"
@@ -79,7 +79,7 @@
                 android:onClick="openSubcategory"/>
 
             <ImageButton
-                android:backgroundTint="#0eaee1"
+                android:backgroundTint="#2196F3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButtonExplore"
@@ -94,7 +94,7 @@
                 android:onClick="openSubcategory"/>
 
             <ImageButton
-                android:backgroundTint="#db3424"
+                android:backgroundTint="#F44336"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButtonEat"

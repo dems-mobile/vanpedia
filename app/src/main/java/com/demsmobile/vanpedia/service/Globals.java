@@ -56,11 +56,11 @@ public class Globals{
         keywords.put("Coffee", "restaurant coffee shop");
         keywords.put("Concert", "entertainment concert");
         keywords.put("Night Life", "night club");
-        keywords.put("Beach", "beach lake");
-        keywords.put("Sport", "sport");
+        keywords.put("Beach", "park|beach");
+        keywords.put("Sport", "sporting events|stadium");
         keywords.put("Bike", "sport bike|rental bike");
-        keywords.put("Hike", "trails|sky resort");
-        keywords.put("Mountain", "sky resort");
+        keywords.put("Hike", "hike|trail");
+        keywords.put("Mountain", "ski|resort");
     }
 
     public void setDestList(ArrayList<Destination> destinationArr){

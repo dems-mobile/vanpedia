@@ -103,9 +103,6 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
 
         addDrawerItems();
         setupDrawer();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     private void addDrawerItems() {
@@ -155,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
             }
         };
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }

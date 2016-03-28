@@ -51,8 +51,10 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_place);
 
+        //String reference =  g.getSelectedPlaceId();
+
         Intent i = getIntent();
-        String reference =  g.getSelectedPlaceId();
+        String reference = i.getStringExtra(KEY_REFERENCE);
 
         new LoadSinglePlaceDetails().execute(reference);
 

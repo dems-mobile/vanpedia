@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dip"
-             android:background="#332d2d2d">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dip"
+         android:background="#332d2d2d">
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:typeface="sans"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:text="address" />
+
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:text="address" />
 
     <!--<ImageView-->
         <!--android:layout_width="80dp"-->
@@ -57,4 +71,4 @@
                 <!--android:layout_alignParentStart="true"-->
                 <!--android:layout_marginTop="5dp" />-->
 
-        </RelativeLayout>
+        </LinearLayout>

@@ -46,20 +46,24 @@ public class CustomListAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.activity_list2, null);
             holder = new ViewHolder();
             holder.nameView = (TextView) convertView.findViewById(R.id.title);
-           // holder.addressView = (TextView) convertView.findViewById(R.id.address);
-           // holder.phoneView = (TextView) convertView.findViewById(R.id.phone);
+            holder.addressView = (TextView) convertView.findViewById(R.id.address);
+            holder.phoneView = (TextView) convertView.findViewById(R.id.phone);
             convertView.setTag(holder);
 
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.nameView.setText(listData.get(position).name);
+        holder.addressView.setText(listData.get(position).vicinity);
+        holder.addressView.setText(listData.get(position).vicinity);
 
         return convertView;
     }
 
     static class ViewHolder {
         TextView nameView;
+        TextView addressView;
+        TextView phoneView;
     }
 }
 

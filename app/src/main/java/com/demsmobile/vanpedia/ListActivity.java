@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -16,7 +15,6 @@ import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.service.Globals;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -35,29 +33,45 @@ public class ListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        setTitle();
-        setBackground();
+       setTitle();
+       setBackground();
 
         place_list_array = (List<Place>)getIntent().getSerializableExtra("PlacesArray");
-
+/*
         for(Iterator<Place> i = place_list_array.iterator(); i.hasNext(); ) {
             Place p = i.next();
             place_list.add(p.name);
             place_list_ref.add(p.reference);
-        }
 
-        lv = (ListView) findViewById(R.id.listViewSubCategoryPlacesResult);
+        }*/
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListActivity.this, R.layout.custom_textview, place_list);
-        lv.setAdapter(adapter);
+       // lv = (ListView) findViewById(R.id.listViewSubCategoryPlacesResult);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      //  ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListActivity.this, R.layout.custom_list, place_list_array);
+      //  lv.setAdapter(adapter);
+
+       /* lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 g.setSelectedPlaceId(place_list_ref.get(position));
                 Intent i = new Intent(ListActivity.this, SinglePlaceActivity.class);
                 startActivity(i);
             };
+        });*/
+
+        final ListView lv1 = (ListView) findViewById(R.id.listViewSubCategoryPlacesResult);
+        lv1.setAdapter(new CustomListAdapter(this, place_list_array));
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Object o = lv1.getItemAtPosition(position);
+                Place placeItem = (Place) o;
+                String reference = placeItem.reference;
+                Intent in = new Intent(getApplicationContext(), SinglePlaceActivity.class);
+                in.putExtra("reference", reference);
+                startActivity(in);
+            }
         });
+
     }
 
 

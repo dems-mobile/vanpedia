@@ -22,8 +22,8 @@ public class Place implements Serializable {
 //    @Key
 //    public String photos;
 
-    @Key
-    public String rating;
+  // @Key
+   // public String rating = "";
 
     @Key
     public String reference;
@@ -48,7 +48,7 @@ public class Place implements Serializable {
 
     @Override
     public String toString() {
-        return name + " - " + rating + " = " + id + " - " + reference;
+        return name  + " = " + id + " - " + reference;
     }
 
     public static class Geometry implements Serializable

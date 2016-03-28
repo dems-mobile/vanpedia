@@ -47,7 +47,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.nameView = (TextView) convertView.findViewById(R.id.title);
             holder.addressView = (TextView) convertView.findViewById(R.id.address);
-            holder.phoneView = (TextView) convertView.findViewById(R.id.phone);
+            holder.ratingView = (TextView) convertView.findViewById(R.id.rating);
             convertView.setTag(holder);
 
         } else {
@@ -55,7 +55,8 @@ public class CustomListAdapter extends BaseAdapter {
         }
         holder.nameView.setText(listData.get(position).name);
         holder.addressView.setText(listData.get(position).vicinity);
-        holder.addressView.setText(listData.get(position).vicinity);
+       // holder.ratingView.setText(listData.get(position).rating);
+        holder.ratingView.setText("");
 
         return convertView;
     }
@@ -63,7 +64,7 @@ public class CustomListAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView nameView;
         TextView addressView;
-        TextView phoneView;
+        TextView ratingView;
     }
 }
 

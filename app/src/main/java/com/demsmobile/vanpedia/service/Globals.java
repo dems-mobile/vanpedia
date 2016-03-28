@@ -1,5 +1,7 @@
 package com.demsmobile.vanpedia.service;
 
+import com.demsmobile.vanpedia.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +13,17 @@ public class Globals{
     private Destination topPlaceToShow;
     private String categoryName;
     private String subCategoryName;
+    private String referenceId;
     private ArrayList<Destination> destList;
 
     // Restrict the constructor from being instantiated
     private Globals(){}
+
+
+    public void setSelectedPlaceId(String ref){ this.referenceId = ref;}
+    public String getSelectedPlaceId(){
+        return this.referenceId;
+    }
 
     public void setCategoryName(String name){
         this.categoryName=name;
@@ -75,5 +84,83 @@ public class Globals{
     }
     public Destination getTopPlaceToShow(){
         return topPlaceToShow;
+    }
+
+    public String getCategoryColor(){
+        String c;
+
+        if (categoryName.equals("eat")) {
+            c = "#F44336";
+        } else if (categoryName.equals("explore")) {
+            c = "#2196F3";
+        } else if (categoryName.equals("stay")) {
+            c = "#4CAF50";
+        } else {
+            c = "#FFFF00";
+        }
+
+        return c;
+    }
+
+    public Integer getSubCategoryIcon(String subCatName){
+        Integer drawableName ;
+        switch(subCatName){
+            case "Fine":
+                drawableName = R.drawable.waiter;
+                break;
+            case "Casual":
+                drawableName = R.drawable.cocktail;
+                break;
+            case "Pub":
+                drawableName = R.drawable.beer;
+                break;
+            case "Breakfast":
+                drawableName = R.drawable.cheese;
+                break;
+            case "Bistro":
+                drawableName = R.drawable.hamburger;
+                break;
+            case "Coffee":
+                drawableName = R.drawable.cafe;
+                break;
+
+            case "Hotel":
+                drawableName = R.drawable.towel;
+                break;
+            case "B&B":
+                drawableName = R.drawable.electric_teapot;
+                break;
+            case "Hostel":
+                drawableName = R.drawable.caretaker;
+                break;
+            case "Rent":
+                drawableName = R.drawable.cafe;
+                break;
+
+            case "Bike":
+                drawableName = R.drawable.mountain_biking;
+                break;
+            case "Sport":
+                drawableName = R.drawable.sport;
+                break;
+            case "Concert":
+                drawableName = R.drawable.music_conductor;
+                break;
+            case "Night Life":
+                drawableName = R.drawable.dance_with_devil;
+                break;
+            case "Beach":
+                drawableName = R.drawable.palm_tree;
+                break;
+            case "Hike":
+                drawableName = R.drawable.trekking;
+                break;
+            case "Mountain":
+                drawableName = R.drawable.climbing;
+                break;
+            default:
+                drawableName = R.drawable.abc_btn_rating_star_on_mtrl_alpha;
+        }
+        return drawableName;
     }
 }

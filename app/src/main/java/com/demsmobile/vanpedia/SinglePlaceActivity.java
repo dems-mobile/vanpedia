@@ -19,6 +19,7 @@ import com.demsmobile.vanpedia.database.MySQLiteHelper;
 import com.demsmobile.vanpedia.database.PlacesContract;
 import com.demsmobile.vanpedia.places.GooglePlaces;
 import com.demsmobile.vanpedia.places.PlaceDetails;
+import com.demsmobile.vanpedia.service.Globals;
 import com.demsmobile.vanpedia.util.AlertManager;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    Globals g = Globals.getInstance();
     AlertManager alert = new AlertManager();
     GooglePlaces googlePlaces;
     PlaceDetails placeDetails;
@@ -50,7 +52,7 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_single_place);
 
         Intent i = getIntent();
-        String reference = i.getStringExtra(KEY_REFERENCE);
+        String reference =  g.getSelectedPlaceId();
 
         new LoadSinglePlaceDetails().execute(reference);
 

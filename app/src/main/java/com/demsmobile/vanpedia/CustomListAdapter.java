@@ -56,7 +56,7 @@ public class CustomListAdapter extends BaseAdapter {
         holder.nameView.setText(listData.get(position).name);
         holder.addressView.setText(listData.get(position).vicinity);
        // holder.ratingView.setText(listData.get(position).rating);
-        holder.ratingView.setText("");
+        holder.ratingView.setText(listData.get(position).rating + "");
 
         return convertView;
     }

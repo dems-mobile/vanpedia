@@ -13,6 +13,7 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonObjectParser;
@@ -67,7 +68,8 @@ public class GooglePlaces {
 
             Log.d(TAG, request.getUrl().toString());
 
-            PlacesList list = request.execute().parseAs(PlacesList.class);
+            HttpResponse response = request.execute();
+            PlacesList list = response.parseAs(PlacesList.class);
             // Check log cat for places response status
             Log.d("Places Status", "" + list.status);
             return list;

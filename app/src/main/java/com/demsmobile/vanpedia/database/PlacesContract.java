@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.demsmobile.vanpedia.places.Place;
+import com.demsmobile.vanpedia.places.PlacesList;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -16,6 +18,7 @@ public class PlacesContract  implements DataAccessObject {
 
     public static final String TABLE_NAME = "places";
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_RATING = "rating";
     public static final String COLUMN_REFERENCE = "reference";
     public static final String COLUMN_ICON = "icon";
     public static final String COLUMN_VICINITY = "vicinity";
@@ -35,6 +38,7 @@ public class PlacesContract  implements DataAccessObject {
         ContentValues values = new ContentValues();
         values.put(_ID, place.id);
         values.put(COLUMN_NAME, place.name);
+        values.put(COLUMN_RATING, place.rating);
         values.put(COLUMN_REFERENCE, place.reference);
         values.put(COLUMN_ICON, place.icon);
         values.put(COLUMN_VICINITY, place.vicinity);
@@ -55,29 +59,57 @@ public class PlacesContract  implements DataAccessObject {
     public Place findPlace(String id) {
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + _ID + " =  \"" + id + "\"";
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, null);
-        Place place = new Place();
+
+        Place place = null;
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            place.id = cursor.getString(0);
-            place.name = cursor.getString(1);
-            place.reference = cursor.getString(2);
-            place.icon = cursor.getString(3);
-            place.vicinity = cursor.getString(4);
-            place.website = cursor.getString(5);
-            Place.Geometry geometry = new Place.Geometry();
-            geometry.location = new Place.Location();
-            geometry.location.lat = Double.parseDouble(cursor.getString(6));
-            geometry.location.lng = Double.parseDouble(cursor.getString(7));
-            place.geometry = geometry;
-            place.formatted_address = cursor.getString(8);
-            place.formatted_phone_number = cursor.getString(9);
 
-            cursor.close();
-        } else {
-            place = null;
+            place = parsePlace(cursor);
         }
+
+        cursor.close();
         dbHelper.close();
 
+        return place;
+    }
+
+    public PlacesList findAllPlaces() {
+        String query = "Select * FROM " + TABLE_NAME;
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, null);
+
+        PlacesList placesList = new PlacesList();
+        placesList.results = new ArrayList<Place>();
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+
+            do {
+                placesList.results.add(parsePlace(cursor));
+                cursor.moveToNext();
+            } while (cursor.isAfterLast());
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return placesList;
+    }
+
+    private Place parsePlace(Cursor cursor) {
+        Place place = new Place();
+        place.id = cursor.getString(0);
+        place.name = cursor.getString(1);
+        place.rating = Float.parseFloat(cursor.getString(2));
+        place.reference = cursor.getString(3);
+        place.icon = cursor.getString(4);
+        place.vicinity = cursor.getString(5);
+        place.website = cursor.getString(6);
+        Place.Geometry geometry = new Place.Geometry();
+        geometry.location = new Place.Location();
+        geometry.location.lat = Double.parseDouble(cursor.getString(7));
+        geometry.location.lng = Double.parseDouble(cursor.getString(8));
+        place.geometry = geometry;
+        place.formatted_address = cursor.getString(9);
+        place.formatted_phone_number = cursor.getString(10);
         return place;
     }
 

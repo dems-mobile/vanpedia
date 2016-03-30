@@ -12,7 +12,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = MySQLiteHelper.class.getSimpleName();
 
     private static final String DATABASE_NAME = "vanpedia";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String SQL_USER_TABLE = new StringBuilder()
             .append("CREATE TABLE ").append(UserContract.TABLE_NAME).append("(")
@@ -27,6 +27,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             .append("CREATE TABLE ").append(PlacesContract.TABLE_NAME).append("(")
             .append(PlacesContract._ID).append(" TEXT PRIMARY KEY,")
             .append(PlacesContract.COLUMN_NAME).append(" TEXT,")
+            .append(PlacesContract.COLUMN_RATING).append(" TEXT,")
             .append(PlacesContract.COLUMN_REFERENCE).append(" TEXT,")
             .append(PlacesContract.COLUMN_ICON).append(" TEXT,")
             .append(PlacesContract.COLUMN_VICINITY).append(" TEXT,")

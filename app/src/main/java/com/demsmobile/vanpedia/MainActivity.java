@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
 
     private void addDrawerItems() {
         String[] osArray = { "Sign In", "Liked Places","Top 5 Picks", "About This App", "References"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mAdapter = new ArrayAdapter<String>(this, R.layout.simple_white_list_item, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

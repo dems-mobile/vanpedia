@@ -94,6 +94,8 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
 
                         starBtn.setImageResource(R.drawable.staryellow);
 
+                        g.setDataHasChanged(true);
+
                     }
                 } else {
                     if (placesDbHelper.deletePlace(placeDetails.result) > 0) {
@@ -102,6 +104,8 @@ public class SinglePlaceActivity extends FragmentActivity implements OnMapReadyC
                                 placeTitle.getText() + " has been removed", Toast.LENGTH_SHORT).show();
 
                         starBtn.setImageResource(R.drawable.starwhite);
+
+                        g.setDataHasChanged(true);
                     }
                 }
             }

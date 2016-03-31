@@ -2,6 +2,7 @@ package com.demsmobile.vanpedia.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.places.PlacesList;
@@ -80,13 +81,12 @@ public class PlacesContract  implements DataAccessObject {
         PlacesList placesList = new PlacesList();
         placesList.results = new ArrayList<Place>();
         if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-
             do {
                 placesList.results.add(parsePlace(cursor));
-                cursor.moveToNext();
-            } while (cursor.isAfterLast());
+            } while (cursor.moveToNext());
         }
+
+//        Log.i(TAG, "Places stared: " + cursor.getCount());
 
         cursor.close();
         dbHelper.close();

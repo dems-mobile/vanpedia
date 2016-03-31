@@ -15,6 +15,7 @@ public class Globals{
     private String subCategoryName;
     private String referenceId;
     private ArrayList<Destination> destList;
+    private boolean dataHasChanged;
 
     // Restrict the constructor from being instantiated
     private Globals(){}
@@ -162,5 +163,13 @@ public class Globals{
                 drawableName = R.drawable.abc_btn_rating_star_on_mtrl_alpha;
         }
         return drawableName;
+    }
+
+    public boolean hasDataChanged() {
+        return dataHasChanged;
+    }
+
+    public void setDataHasChanged(boolean dataHasChanged) {
+        this.dataHasChanged = dataHasChanged;
     }
 }

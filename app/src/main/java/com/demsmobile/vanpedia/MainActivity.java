@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +23,9 @@ import android.widget.Toast;
 
 import com.demsmobile.vanpedia.data.Channel;
 import com.demsmobile.vanpedia.data.Item;
+import com.demsmobile.vanpedia.database.MySQLiteHelper;
+import com.demsmobile.vanpedia.database.PlacesContract;
+import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.service.Destination;
 import com.demsmobile.vanpedia.service.DestinationList;
 import com.demsmobile.vanpedia.service.Globals;
@@ -30,6 +34,7 @@ import com.demsmobile.vanpedia.service.ServiceCallback;
 import com.demsmobile.vanpedia.service.YahooWeatherService;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
 
     private YahooWeatherService weatherService;
     private LocationService locationService;
+    private Globals g = Globals.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
 
     private void addDrawerItems() {
         String[] osArray = { "Sign In", "Liked Places","Top 5 Picks", "About This App", "References"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mAdapter = new ArrayAdapter<String>(this, R.layout.simple_white_list_item, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                         startActivity(new Intent(MainActivity.this, SignInActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this, FavouriteActivity.class));
+                        //startActivity(new Intent(MainActivity.this, FavouriteActivity.class));
+                        getFavoritePlaces();
                         break;
                     case 2:
                         startActivity(new Intent(MainActivity.this, DestinationActivity.class));
@@ -132,6 +139,31 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                 }
             }
         });
+    }
+
+    private void getFavoritePlaces() {
+        new AsyncTask<String, Void, List<Place>>() {
+            @Override
+            protected List<Place> doInBackground(String... strings) {
+                PlacesContract placesDbHelper = new PlacesContract(new MySQLiteHelper(getApplicationContext()));
+
+                return placesDbHelper.findAllPlaces().results;
+            }
+
+            @Override
+            protected void onPostExecute(List<Place> places) {
+                if (places.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "You haven't added places yet!", Toast.LENGTH_SHORT).show();
+                } else {
+                    g.setCategoryName("Mixed");
+                    Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                    intent.putExtra("PlacesArray", (Serializable) places);   //(Parcelable) places
+                    startActivity(intent);
+                }
+            }
+
+        }.execute();
+
     }
 
     private void setupDrawer() {
@@ -162,7 +194,9 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        if (mDrawerToggle != null) {
+            mDrawerToggle.syncState();
+        }
     }
 
     @Override

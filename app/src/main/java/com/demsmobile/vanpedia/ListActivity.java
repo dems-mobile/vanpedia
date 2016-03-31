@@ -3,6 +3,7 @@ package com.demsmobile.vanpedia;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,10 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.demsmobile.vanpedia.database.MySQLiteHelper;
+import com.demsmobile.vanpedia.database.PlacesContract;
 import com.demsmobile.vanpedia.places.Place;
 import com.demsmobile.vanpedia.service.Globals;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,15 +79,46 @@ public class ListActivity extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (g.getCategoryName().equals("Mixed") && g.hasDataChanged()) {
+            new AsyncTask<String, Void, List<Place>>() {
+                @Override
+                protected List<Place> doInBackground(String... strings) {
+                    PlacesContract placesDbHelper = new PlacesContract(new MySQLiteHelper(getApplicationContext()));
+
+                    return placesDbHelper.findAllPlaces().results;
+                }
+
+                @Override
+                protected void onPostExecute(List<Place> places) {
+                    if (places.isEmpty()) {
+                        Toast.makeText(ListActivity.this, "You have no favorite places!", Toast.LENGTH_SHORT).show();
+                    }
+                    final ListView lv1 = (ListView) findViewById(R.id.listViewSubCategoryPlacesResult);
+                    lv1.setAdapter(new CustomListAdapter(ListActivity.this, places));
+
+                    g.setDataHasChanged(false);
+                }
+
+            }.execute();
+        }
+    }
 
     public void setTitle(){
         tv = (TextView)findViewById(R.id.listViewSubCategoryPlacesResultTitle);
         String categoryName = g.getCategoryName();
-        tv.setText("Let's " + categoryName + " " + g.getSubCategoryName());
-        tv.setTextColor(Color.parseColor(g.getCategoryColor()));
+        if (categoryName.equals("Mixed")) {
+            tv.setText("Your Favorite Places");
+            //TODO - Improve layout
+        } else {
+            tv.setText("Let's " + categoryName + " " + g.getSubCategoryName());
+            tv.setTextColor(Color.parseColor(g.getCategoryColor()));
 
-        icon = (ImageView)findViewById(R.id.activityListHolderIcon);
-        icon.setImageResource(g.getSubCategoryIcon(g.getSubCategoryName()));
+            icon = (ImageView) findViewById(R.id.activityListHolderIcon);
+            icon.setImageResource(g.getSubCategoryIcon(g.getSubCategoryName()));
+        }
 
     }
 

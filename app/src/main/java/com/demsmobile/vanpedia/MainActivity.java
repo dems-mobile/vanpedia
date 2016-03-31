@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements ServiceCallback<C
                         startActivity(new Intent(MainActivity.this, SignInActivity.class));
                         break;
                     case 1:
+                        //startActivity(new Intent(MainActivity.this, FavouriteActivity.class));
                         getFavoritePlaces();
                         break;
                     case 2:

@@ -92,7 +92,7 @@
                     android:background="#80003366"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/homepage"
+                    android:src="@drawable/beer"
                     android:onClick="process"
                     android:backgroundTint="#14666666" />
 

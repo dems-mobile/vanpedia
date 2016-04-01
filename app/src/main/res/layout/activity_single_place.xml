@@ -5,15 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dip"
-    android:background="#ff202020"
+    android:background="@drawable/waterbackground"
     android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:orientation="vertical"
-        android:padding="10dip"
-        android:background="#ff202020">
+        android:padding="10dip">
 
         <!-- Name Label -->
 
@@ -49,12 +48,12 @@
             android:id="@+id/callButton"
             android:layout_gravity="right"
             android:src="@drawable/phone"
-            android:background="#ff202020"
             android:layout_marginRight="41dp"
             android:layout_marginEnd="41dp"
             android:layout_alignTop="@+id/starButton"
             android:layout_toLeftOf="@+id/starButton"
-            android:layout_toStartOf="@+id/starButton" />
+            android:layout_toStartOf="@+id/starButton"
+            android:background="#00080808" />
         <!-- PHONE NUMBER-->
         <TextView
             android:id="@+id/phone"
@@ -83,10 +82,10 @@
             android:layout_height="50dp"
             android:id="@+id/starButton"
             android:src="@drawable/starwhite"
-            android:background="#ff202020"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/address"
-            android:layout_alignEnd="@+id/address" />
+            android:layout_alignEnd="@+id/address"
+            android:background="#00080808" />
         <!-- website button-->
         <TextView
             android:layout_width="195dp"

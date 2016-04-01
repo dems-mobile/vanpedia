@@ -98,7 +98,6 @@ public class ListActivity extends Activity {
                     }
                     final ListView lv1 = (ListView) findViewById(R.id.listViewSubCategoryPlacesResult);
                     lv1.setAdapter(new CustomListAdapter(ListActivity.this, places));
-
                     g.setDataHasChanged(false);
                 }
 
@@ -110,7 +109,9 @@ public class ListActivity extends Activity {
         tv = (TextView)findViewById(R.id.listViewSubCategoryPlacesResultTitle);
         String categoryName = g.getCategoryName();
         if (categoryName.equals("Mixed")) {
-            tv.setText("Your Favorite Places");
+            tv.setText("Your Favourites");
+            icon = (ImageView) findViewById(R.id.activityListHolderIcon);
+            icon.setImageResource(R.drawable.staryellow);
             //TODO - Improve layout
         } else {
             tv.setText("Let's " + categoryName + " " + g.getSubCategoryName());
@@ -148,7 +149,13 @@ public class ListActivity extends Activity {
             } else {
                 layout.setBackground( getResources().getDrawable(R.drawable.hotelblurimg));
             }
+        } else {
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                layout.setBackgroundDrawable( getResources().getDrawable(R.drawable.favoritebackground) );
+        }   else {
+                layout.setBackground( getResources().getDrawable(R.drawable.favoritebackground));
         }
+    }
     }
 
 }

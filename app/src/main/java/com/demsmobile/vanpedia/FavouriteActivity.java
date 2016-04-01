@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.demsmobile.vanpedia.database.MySQLiteHelper;
@@ -31,12 +32,12 @@ public class FavouriteActivity extends android.app.ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ListView lv = getListView();
-        lv.setTextFilterEnabled(true);
-        lv.setBackgroundResource(R.drawable.favoritebackground);
-        lv.setCacheColorHint(0);
-        
+//        getWindow().setBackgroundDrawableResource(R.drawable.favoritebackground);
+//        ListView lv = getListView();
+//        lv.setTextFilterEnabled(true);
+//        lv.setBackgroundResource(R.drawable.favoritebackground);
+//        lv.setCacheColorHint(0);
+//
         getFavoritePlaces();
     }
 
@@ -79,7 +80,8 @@ public class FavouriteActivity extends android.app.ListActivity {
                     Toast.makeText(FavouriteActivity.this, "You haven't added places yet!", Toast.LENGTH_SHORT).show();
                 }
 
-                setListAdapter(new ArrayAdapter<String>(FavouriteActivity.this, R.layout.activity_favourite, R.id.favList,getPlacesNames(places)));;
+                setListAdapter(new ArrayAdapter<String>(FavouriteActivity.this, R.layout.activity_favourite, R.id.favList,getPlacesNames(places)));
+
             }
 
         }.execute();

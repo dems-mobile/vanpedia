@@ -44,7 +44,6 @@ public class GooglePlaces {
      * @param latitude - latitude of place
      * @params longitude - longitude of place
      * @param radius - radius of searchable area
-     * @param types - type of place to search
      * @return list of places
      * */
     public PlacesList search(double latitude, double longitude, double radius, String keywords)
@@ -61,7 +60,8 @@ public class GooglePlaces {
                     .buildGetRequest(new GenericUrl(PLACES_SEARCH_URL));
             request.getUrl().put("key", API_KEY);
             request.getUrl().put("location", _latitude + "," + _longitude);
-            request.getUrl().put("radius", _radius); // in meters
+//            request.getUrl().put("radius", _radius); // in meters
+            request.getUrl().put("rankby", "distance");
             request.getUrl().put("sensor", "true");
             if(keywords != null)
                 request.getUrl().put("keyword", keywords);
